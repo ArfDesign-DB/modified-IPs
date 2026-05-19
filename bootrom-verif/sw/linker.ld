@@ -1,0 +1,18 @@
+ENTRY(_start)
+
+MEMORY
+{
+  ROM (rx) : ORIGIN = 0x00000000, LENGTH = 4K
+}
+
+SECTIONS
+{
+  .text : {
+    *(.text.start)
+    *(.text*)
+  } > ROM
+
+  .rodata : {
+    *(.rodata*)
+  } > ROM
+}

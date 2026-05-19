@@ -1,0 +1,134 @@
+#ifndef TB_COMMON_H
+#define TB_COMMON_H
+
+#include "Vboot_rom.h"
+#include "verilated.h"
+#include "verilated_vcd_c.h"
+#include "verilated_cov.h"
+
+#include <iostream>
+#include <fstream>
+#include <iomanip>
+#include <cstdlib>
+
+vluint64_t sim_time = 0;
+
+double sc_time_stamp() {
+    return sim_time;
+}
+
+class BootRomCov {
+public:
+
+    bool addr_quadrant[4] = {0};
+
+    bool corner_0     = false;
+    bool corner_max   = false;
+    bool pattern_155  = false;
+    bool pattern_2aa  = false;
+
+    void sample(uint32_t addr) {
+
+        if (addr < 256)
+            addr_quadrant[0] = true;
+        else if (addr < 512)
+            addr_quadrant[1] = true;
+        else if (addr < 768)
+            addr_quadrant[2] = true;
+        else
+            addr_quadrant[3] = true;
+
+        if (addr == 0x000)
+            corner_0 = true;
+
+        if (addr == 0x3FF)
+            corner_max = true;
+
+        if (addr == 0x155)
+            pattern_155 = true;
+
+        if (addr == 0x2AA)
+            pattern_2aa = true;
+    }
+
+    float report(const std::string& filename) {
+
+        std::ofstream report(filename);
+
+        int hit = 0;
+        int total = 8;
+
+        for (int i = 0; i < 4; i++) {
+            if (addr_quadrant[i])
+                hit++;
+        }
+
+        if (corner_0)    hit++;
+        if (corner_max)  hit++;
+        if (pattern_155) hit++;
+        if (pattern_2aa) hit++;
+
+        float cov = (100.0 * hit) / total;
+
+        report
+            << "FUNCTIONAL COVERAGE\n"
+            << "----------------------------------------\n";
+
+        for (int i = 0; i < 4; i++) {
+
+            report
+                << "ADDR_BIN_" << i
+                << " : "
+                << (addr_quadrant[i] ? "HIT" : "MISS")
+                << "\n";
+        }
+
+        report
+            << "CORNER_000 : "
+            << (corner_0 ? "HIT" : "MISS")
+            << "\n";
+
+        report
+            << "CORNER_3FF : "
+            << (corner_max ? "HIT" : "MISS")
+            << "\n";
+
+        report
+            << "PATTERN_155 : "
+            << (pattern_155 ? "HIT" : "MISS")
+            << "\n";
+
+        report
+            << "PATTERN_2AA : "
+            << (pattern_2aa ? "HIT" : "MISS")
+            << "\n\n";
+
+        report
+            << "Functional Coverage : "
+            << std::fixed
+            << std::setprecision(2)
+            << cov
+            << "%\n";
+
+        report.close();
+
+        return cov;
+    }
+};
+
+static void tick(Vboot_rom* top, VerilatedVcdC* tfp) {
+
+    top->clk_i = 0;
+    top->eval();
+
+    tfp->dump(sim_time);
+    sim_time += 5;
+
+    top->clk_i = 1;
+    top->eval();
+
+    tfp->dump(sim_time);
+    sim_time += 5;
+}
+
+#endif

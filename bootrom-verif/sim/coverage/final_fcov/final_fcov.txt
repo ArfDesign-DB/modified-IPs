@@ -1,0 +1,18 @@
+========================================
+ FINAL FUNCTIONAL COVERAGE REPORT
+========================================
+
+ADDR_BIN_0=1
+ADDR_BIN_1=1
+ADDR_BIN_2=1
+ADDR_BIN_3=1
+
+CORNER_000=1
+CORNER_3FF=1
+
+PATTERN_155=1
+PATTERN_2AA=1
+
+----------------------------------------
+FUNCTIONAL COVERAGE = 100%
+----------------------------------------

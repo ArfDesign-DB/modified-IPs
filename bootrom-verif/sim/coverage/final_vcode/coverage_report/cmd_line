@@ -1,0 +1,1 @@
+genhtml sim/coverage/final_vcode/final_code_cov.info -o sim/coverage/final_vcode/coverage_report --branch-coverage --substitute s#\.\./rtl#/home/anurag/projects/ibex_SOC/ip_verificaton/bootrom-verif/rtl#

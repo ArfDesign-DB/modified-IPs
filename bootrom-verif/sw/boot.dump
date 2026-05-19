@@ -1,0 +1,39 @@
+
+boot.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00000000 <_start>:
+   0:	111110b7          	lui	ra,0x11111
+   4:	11108093          	addi	ra,ra,273 # 11111111 <loop+0x111110bf>
+   8:	22222137          	lui	sp,0x22222
+   c:	22210113          	addi	sp,sp,546 # 22222222 <loop+0x222221d0>
+  10:	333331b7          	lui	gp,0x33333
+  14:	33318193          	addi	gp,gp,819 # 33333333 <loop+0x333332e1>
+  18:	44444237          	lui	tp,0x44444
+  1c:	44420213          	addi	tp,tp,1092 # 44444444 <loop+0x444443f2>
+  20:	002082b3          	add	t0,ra,sp
+  24:	40328333          	sub	t1,t0,gp
+  28:	004343b3          	xor	t2,t1,tp
+  2c:	0013e433          	or	s0,t2,ra
+  30:	002474b3          	and	s1,s0,sp
+  34:	00349513          	slli	a0,s1,0x3
+  38:	00155593          	srli	a1,a0,0x1
+  3c:	00108363          	beq	ra,ra,42 <label1>
+  40:	0001                	nop
+
+00000042 <label1>:
+  42:	00209363          	bne	ra,sp,48 <label2>
+  46:	0001                	nop
+
+00000048 <label2>:
+  48:	0040006f          	j	4c <done>
+
+0000004c <done>:
+  4c:	0001                	nop
+  4e:	0001                	nop
+  50:	0001                	nop
+
+00000052 <loop>:
+  52:	a001                	j	52 <loop>
