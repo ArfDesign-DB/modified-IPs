@@ -1,0 +1,62 @@
+#!/bin/bash
+
+set -e
+
+TEST=$1
+
+if [ -z "$TEST" ]; then
+    echo "Usage:"
+    echo "./run.sh TC_001_bootrom_addr_sweep_test"
+    exit 1
+fi
+
+echo "========================================"
+echo " RUNNING TEST: $TEST"
+echo "========================================"
+
+cd ../sw
+
+make clean
+make
+
+cp boot.mem ../sim/
+
+cd ../sim
+
+rm -rf obj_dir
+
+make TEST=$TEST
+make run
+
+echo ""
+echo "========================================"
+echo " GENERATING COVERAGE"
+echo "========================================"
+
+mkdir -p coverage_report/$TEST
+
+verilator_coverage \
+  --annotate coverage_report/$TEST \
+  ${TEST}.dat
+
+echo ""
+echo "========================================"
+echo " TEST COMPLETE"
+echo "========================================"
+
+echo "Waveform:"
+echo "  waves/${TEST}.vcd"
+
+echo ""
+
+echo "Coverage:"
+echo "  sim/${TEST}.info"
+
+echo ""
+
+echo "RTL Coverage:"
+echo "  sim/coverage_report/${TEST}/"
+
+echo ""
+
+gtkwave ../waves/${TEST}.vcd

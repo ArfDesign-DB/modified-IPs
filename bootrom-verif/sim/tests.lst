@@ -1,0 +1,3 @@
+TC_001_bootrom_addr_sweep_test
+TC_002_bootrom_corner_pattern_test
+TC_003_bootrom_random_access_test
