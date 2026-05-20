@@ -1,0 +1,11 @@
+tb_timer.o: \
+ /home/manju_arf/ibex-demo-system/manju/timer-verif/tb/tb_timer.cpp \
+ /usr/local/share/verilator/include/verilated.h \
+ /usr/local/share/verilator/include/verilatedos.h \
+ /usr/local/share/verilator/include/verilated_config.h \
+ /usr/local/share/verilator/include/verilated_types.h \
+ /usr/local/share/verilator/include/verilated_funcs.h \
+ /usr/local/share/verilator/include/verilated_vcd_c.h \
+ /usr/local/share/verilator/include/verilated.h \
+ /usr/local/share/verilator/include/verilated_trace.h \
+ /usr/local/share/verilator/include/verilated_cov.h Vtimer.h
