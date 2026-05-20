@@ -1,0 +1,6 @@
+/home/arjun/verif_gpio/sim/build/CMakeFiles/verilate.dir
+/home/arjun/verif_gpio/sim/build/CMakeFiles/run.dir
+/home/arjun/verif_gpio/sim/build/CMakeFiles/coverage.dir
+/home/arjun/verif_gpio/sim/build/CMakeFiles/clean_cov.dir
+/home/arjun/verif_gpio/sim/build/CMakeFiles/edit_cache.dir
+/home/arjun/verif_gpio/sim/build/CMakeFiles/rebuild_cache.dir
