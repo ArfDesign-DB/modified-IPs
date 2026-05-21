@@ -1,0 +1,52 @@
+#include <iostream>
+
+#include "verilated.h"
+#include "verilated_vcd_c.h"
+#include "Vwb_interconnect.h"
+
+void test_sram_read(Vwb_interconnect* dut,
+                    VerilatedVcdC* trace);
+
+int main(int argc, char **argv)
+{
+    Verilated::commandArgs(argc, argv);
+
+    Verilated::traceEverOn(true);
+
+    std::cout << "\n=========================================\n";
+    std::cout << "SRAM READ TEST STARTED\n";
+    std::cout << "=========================================\n";
+
+    Vwb_interconnect* dut = new Vwb_interconnect;
+    VerilatedVcdC* trace = new VerilatedVcdC;
+
+    dut->trace(trace, 99);
+    trace->open("wave.vcd");
+
+    // ======================
+    // RESET
+    // ======================
+    dut->rst_ni = 0;
+    dut->wb_cyc_i = 0;
+    dut->wb_stb_i = 0;
+    dut->wb_we_i  = 0;
+
+    dut->eval();
+
+    dut->rst_ni = 1;
+    dut->eval();
+
+    // ======================
+    // TEST
+    // ======================
+    test_sram_read(dut, trace);
+
+    trace->close();
+
+    delete trace;
+    delete dut;
+
+    std::cout << "\nTEST FINISHED\n";
+
+    return 0;
+}

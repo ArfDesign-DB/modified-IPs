@@ -1,0 +1,11 @@
+main_sram_write.o: ../../tb/main/main_sram_write.cpp \
+ /usr/local/verilator-4.228/share/verilator/include/verilated.h \
+ /usr/local/verilator-4.228/share/verilator/include/verilatedos.h \
+ /usr/local/verilator-4.228/share/verilator/include/verilated_config.h \
+ /usr/local/verilator-4.228/share/verilator/include/verilated_types.h \
+ /usr/local/verilator-4.228/share/verilator/include/verilated_funcs.h \
+ /usr/local/verilator-4.228/share/verilator/include/verilated_vcd_c.h \
+ /usr/local/verilator-4.228/share/verilator/include/verilated.h \
+ /usr/local/verilator-4.228/share/verilator/include/verilated_trace.h \
+ /usr/local/verilator-4.228/share/verilator/include/verilated_trace_defs.h \
+ Vwb_interconnect.h
