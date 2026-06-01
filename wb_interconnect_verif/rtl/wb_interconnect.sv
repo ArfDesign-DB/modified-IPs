@@ -164,7 +164,8 @@ module wb_interconnect #(
   localparam logic [31:0] BOOTROM_BASE = 32'h0010_0000;
   localparam logic [31:0] BOOTROM_MASK = 32'hFFFF_F000;
 
-  localparam logic [31:0] SRAM_BASE    = 32'h0010_1000;
+  //localparam logic [31:0] SRAM_BASE    = 32'h0010_1000;
+  localparam logic [31:0] SRAM_BASE    = 32'h0010_2000;
   localparam logic [31:0] SRAM_MASK    = 32'hFFFF_F000;
 
   localparam logic [31:0] XIP_BASE     = 32'h2000_0000;
@@ -218,6 +219,8 @@ module wb_interconnect #(
 
     sram_sel =
       ((wb_adr_i & SRAM_MASK) == SRAM_BASE);
+     
+     //sram_sel = (wb_adr_i >= 32'h0010_1000) && (wb_adr_i <= 32'h0010_2FFF);
 
     xip_sel =
       ((wb_adr_i & XIP_MASK) == XIP_BASE);

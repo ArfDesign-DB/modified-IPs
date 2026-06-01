@@ -28,7 +28,7 @@ void test_sram_write(Vwb_interconnect* dut,
     dut->wb_we_i  = 1;
 
     // 🔥 SRAM address (adjust if your decode differs)
-    dut->wb_adr_i = 0x00101000;
+    dut->wb_adr_i = 0x00102000;
     dut->wb_dat_i = 0xA5A5A5A5;
     dut->wb_sel_i = 0xF;
 
