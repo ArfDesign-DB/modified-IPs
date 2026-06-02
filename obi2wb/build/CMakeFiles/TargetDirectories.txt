@@ -1,0 +1,5 @@
+/home/arjun/obi2wb/build/CMakeFiles/verilate.dir
+/home/arjun/obi2wb/build/CMakeFiles/run.dir
+/home/arjun/obi2wb/build/CMakeFiles/coverage.dir
+/home/arjun/obi2wb/build/CMakeFiles/edit_cache.dir
+/home/arjun/obi2wb/build/CMakeFiles/rebuild_cache.dir

@@ -6,6 +6,7 @@
 #include "Vobi2wb.h"
 #include "verilated.h"
 #include "verilated_vcd_c.h"
+#include "verilated_cov.h"
 
 #include <cstdio>
 #include <cstdint>
@@ -50,6 +51,9 @@ double sc_time_stamp()
 // WB SLAVE SAMPLE (no prints)
 // =============================================================================
 
+//static bool ack_pending = false;
+static bool ack_delay   = false;
+
 static void slave_sample()
 {
     if (dut->rst_ni &&
@@ -57,16 +61,13 @@ static void slave_sample()
         dut->wb_stb_o &&
         !dut->wb_stall_i)
     {
-        ack_pending = true;
+        ack_delay = true;     // first cycle after request
+
         was_write = dut->wb_we_o;
         lat_addr  = dut->wb_adr_o;
         lat_wdata = dut->wb_dat_o;
     }
 }
-
-// =============================================================================
-// WB SLAVE APPLY (no prints)
-// =============================================================================
 
 static void slave_apply()
 {
@@ -77,18 +78,73 @@ static void slave_apply()
         dut->wb_ack_i = 1;
 
         if (was_write)
-        {
             mem[(lat_addr >> 2) & 0xFF] = lat_wdata;
-        }
         else
-        {
             dut->wb_dat_i = mem[(lat_addr >> 2) & 0xFF];
-        }
 
         ack_pending = false;
     }
+
+    // Move from delay state to pending state
+    if (ack_delay)
+    {
+        ack_pending = true;
+        ack_delay   = false;
+    }
 }
 
+
+
+
+/*
+// =============================================================================
+// Wishbone Slave - Sample Request
+// =============================================================================
+static void slave_sample()
+{
+    if (dut->rst_ni &&
+        dut->wb_cyc_o &&
+        dut->wb_stb_o &&
+        !dut->wb_stall_i)
+    {
+        ack_pending = true;
+
+        was_write = dut->wb_we_o;
+        lat_addr  = dut->wb_adr_o;
+        lat_wdata = dut->wb_dat_o;
+    }
+}
+
+// =============================================================================
+// Wishbone Slave - Apply Response
+// =============================================================================
+static void slave_apply()
+{
+    // Default outputs
+    dut->wb_ack_i = 0;
+
+    if (!ack_pending)
+        return;
+
+    dut->wb_ack_i = 1;
+
+    uint32_t index = (lat_addr >> 2) & 0xFF;
+
+    if (was_write)
+    {
+        // Write transaction
+        mem[index] = lat_wdata;
+    }
+    else
+    {
+        // Read transaction
+        dut->wb_dat_i = mem[index];
+    }
+
+    ack_pending = false;
+}
+
+*/
 // =============================================================================
 // COMB EVAL
 // =============================================================================
@@ -116,7 +172,7 @@ static void posedge_half()
         tfp->dump(sim_time);
 
     // Print all relevant signals at posedge
-    printf(
+    /*printf(
         "[POSEDGE %5llu] "
         "REQ=%d GNT=%d RVALID=%d RDATA=0x%08X | "
         "OBI_ADDR=0x%08X WE=%d BE=0x%X WDATA=0x%08X | "
@@ -139,7 +195,7 @@ static void posedge_half()
         dut->wb_ack_i,
         dut->wb_dat_i,
         dut->wb_stall_i
-    );
+    );*/
 
     sim_time += 5;
 }
@@ -230,6 +286,10 @@ static void do_reset()
 
 static void obi_write(uint32_t addr, uint32_t data)
 {
+
+   posedge_half();
+    negedge_half();
+    
     dut->obi_addr_i  = addr;
     dut->obi_wdata_i = data;
     dut->obi_we_i    = 1;
@@ -247,6 +307,7 @@ static void obi_write(uint32_t addr, uint32_t data)
 
     posedge_half();
     negedge_half();
+    dut->obi_req_i = 0;
 
     if (!wait_for([&]() { return dut->obi_rvalid_o; }, 200))
     {
@@ -254,10 +315,12 @@ static void obi_write(uint32_t addr, uint32_t data)
         dut->obi_req_i = 0;
         return;
     }
-
-    dut->obi_req_i = 0;
+    
+    
     comb_eval();
-    negedge_half();
+    //posedge_half();
+    //negedge_half();
+    //negedge_half();
 }
 
 // =============================================================================
@@ -266,6 +329,9 @@ static void obi_write(uint32_t addr, uint32_t data)
 
 static void obi_read(uint32_t addr)
 {
+
+    posedge_half();
+    negedge_half();
     dut->obi_addr_i = addr;
     dut->obi_we_i   = 0;
     dut->obi_be_i   = 0xF;
@@ -282,6 +348,7 @@ static void obi_read(uint32_t addr)
 
     posedge_half();
     negedge_half();
+    dut->obi_req_i = 0;
 
     if (!wait_for([&]() { return dut->obi_rvalid_o; }, 200))
     {
@@ -300,7 +367,7 @@ static void obi_read(uint32_t addr)
 
     dut->obi_req_i = 0;
     comb_eval();
-    negedge_half();
+    //negedge_half();
 }
 
 // =============================================================================
@@ -337,6 +404,6 @@ int main(int argc, char **argv)
     tfp->close();
     delete tfp;
     delete dut;
-
+    VerilatedCov::write("coverage.dat");
     return 0;
 }
