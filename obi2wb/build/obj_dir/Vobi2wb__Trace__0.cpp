@@ -31,29 +31,30 @@ void Vobi2wb___024root__trace_chg_0_sub_0(Vobi2wb___024root* vlSelf, VerilatedVc
         bufp->chgBit(oldp+4,(vlSelf->obi2wb__DOT__we_q));
         bufp->chgIData(oldp+5,(vlSelf->obi2wb__DOT__rdata_q),32);
         bufp->chgBit(oldp+6,(vlSelf->obi2wb__DOT__req_sent_q));
-        bufp->chgBit(oldp+7,(vlSelf->obi2wb__DOT__obi_rvalid_q));
+        bufp->chgBit(oldp+7,(vlSelf->obi2wb__DOT__wb_active_q));
+        bufp->chgBit(oldp+8,(vlSelf->obi2wb__DOT__obi_gnt_q));
+        bufp->chgBit(oldp+9,(vlSelf->obi2wb__DOT__obi_rvalid_q));
     }
-    bufp->chgBit(oldp+8,(vlSelf->clk_i));
-    bufp->chgBit(oldp+9,(vlSelf->rst_ni));
-    bufp->chgBit(oldp+10,(vlSelf->obi_req_i));
-    bufp->chgBit(oldp+11,(vlSelf->obi_gnt_o));
-    bufp->chgIData(oldp+12,(vlSelf->obi_addr_i),32);
-    bufp->chgBit(oldp+13,(vlSelf->obi_we_i));
-    bufp->chgCData(oldp+14,(vlSelf->obi_be_i),4);
-    bufp->chgIData(oldp+15,(vlSelf->obi_wdata_i),32);
-    bufp->chgBit(oldp+16,(vlSelf->obi_rvalid_o));
-    bufp->chgIData(oldp+17,(vlSelf->obi_rdata_o),32);
-    bufp->chgBit(oldp+18,(vlSelf->wb_cyc_o));
-    bufp->chgBit(oldp+19,(vlSelf->wb_stb_o));
-    bufp->chgBit(oldp+20,(vlSelf->wb_we_o));
-    bufp->chgIData(oldp+21,(vlSelf->wb_adr_o),32);
-    bufp->chgIData(oldp+22,(vlSelf->wb_dat_o),32);
-    bufp->chgCData(oldp+23,(vlSelf->wb_sel_o),4);
-    bufp->chgBit(oldp+24,(vlSelf->wb_ack_i));
-    bufp->chgIData(oldp+25,(vlSelf->wb_dat_i),32);
-    bufp->chgBit(oldp+26,(vlSelf->wb_stall_i));
-    bufp->chgBit(oldp+27,(vlSelf->obi2wb__DOT__state_d));
-    bufp->chgBit(oldp+28,(vlSelf->obi2wb__DOT__immediate_ack));
+    bufp->chgBit(oldp+10,(vlSelf->clk_i));
+    bufp->chgBit(oldp+11,(vlSelf->rst_ni));
+    bufp->chgBit(oldp+12,(vlSelf->obi_req_i));
+    bufp->chgBit(oldp+13,(vlSelf->obi_gnt_o));
+    bufp->chgIData(oldp+14,(vlSelf->obi_addr_i),32);
+    bufp->chgBit(oldp+15,(vlSelf->obi_we_i));
+    bufp->chgCData(oldp+16,(vlSelf->obi_be_i),4);
+    bufp->chgIData(oldp+17,(vlSelf->obi_wdata_i),32);
+    bufp->chgBit(oldp+18,(vlSelf->obi_rvalid_o));
+    bufp->chgIData(oldp+19,(vlSelf->obi_rdata_o),32);
+    bufp->chgBit(oldp+20,(vlSelf->wb_cyc_o));
+    bufp->chgBit(oldp+21,(vlSelf->wb_stb_o));
+    bufp->chgBit(oldp+22,(vlSelf->wb_we_o));
+    bufp->chgIData(oldp+23,(vlSelf->wb_adr_o),32);
+    bufp->chgIData(oldp+24,(vlSelf->wb_dat_o),32);
+    bufp->chgCData(oldp+25,(vlSelf->wb_sel_o),4);
+    bufp->chgBit(oldp+26,(vlSelf->wb_ack_i));
+    bufp->chgIData(oldp+27,(vlSelf->wb_dat_i),32);
+    bufp->chgBit(oldp+28,(vlSelf->wb_stall_i));
+    bufp->chgBit(oldp+29,(vlSelf->obi2wb__DOT__state_d));
 }
 
 void Vobi2wb___024root__trace_cleanup(void* voidSelf, VerilatedVcd* /*unused*/) {

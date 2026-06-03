@@ -370,6 +370,85 @@ static void obi_read(uint32_t addr)
     //negedge_half();
 }
 
+
+static void test_single_write_read()
+{
+printf("\n[TEST] Single Write Read\n");
+
+obi_write(0x04, 0x12345678);
+obi_read(0x04);
+
+}
+
+static void test_sequential_access()
+{
+printf("\n[TEST] Sequential Access\n");
+
+for (int i = 0; i < 16; i++)
+    obi_write(i * 4, 0x1000 + i);
+
+for (int i = 0; i < 16; i++)
+    obi_read(i * 4);
+
+}
+
+static void test_boundary_addresses()
+{
+printf("\n[TEST] Boundary Addresses\n");
+
+obi_write(0x00000000, 0x11111111);
+obi_write(0x000003FC, 0x22222222);
+
+obi_read(0x00000000);
+obi_read(0x000003FC);
+
+}
+
+static void test_same_address_overwrite()
+{
+printf("\n[TEST] Same Address Overwrite\n");
+
+obi_write(0x20, 0xAAAAAAAA);
+obi_read (0x20);
+
+obi_write(0x20, 0x55555555);
+obi_read (0x20);
+
+}
+
+static void test_random_transactions(int count = 100)
+{
+printf("\n[TEST] Random Transactions\n");
+
+for (int i = 0; i < count; i++)
+{
+    uint32_t addr = ((rand() % 256) << 2);
+    uint32_t data = rand();
+
+    obi_write(addr, data);
+    obi_read(addr);
+}
+
+}
+
+static void test_back_to_back_writes()
+{
+printf("\n[TEST] Back-to-Back Writes\n");
+
+for (int i = 0; i < 32; i++)
+    obi_write(i * 4, i);
+
+}
+
+static void test_back_to_back_reads()
+{
+printf("\n[TEST] Back-to-Back Reads\n");
+
+for (int i = 0; i < 32; i++)
+    obi_read(i * 4);
+
+}
+
 // =============================================================================
 // MAIN
 // =============================================================================
@@ -392,10 +471,13 @@ int main(int argc, char **argv)
 
     printf("\n============= START TEST =============\n");
 
-    obi_write(0x00000004, 0x00000015);
-    obi_write(0x00000008, 0xDEADBEEF);
-    obi_read(0x00000004);
-    obi_read(0x00000008);
+    test_single_write_read();
+    test_sequential_access();
+    test_boundary_addresses();
+    test_same_address_overwrite();
+    test_back_to_back_writes();
+    test_back_to_back_reads();
+    //test_random_transactions(100);
 
     printf("\n============= END TEST =============\n");
 

@@ -35,8 +35,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vobi2wb___024root final : public VerilatedMod
         CData/*3:0*/ obi2wb__DOT__be_q;
         CData/*0:0*/ obi2wb__DOT__we_q;
         CData/*0:0*/ obi2wb__DOT__req_sent_q;
+        CData/*0:0*/ obi2wb__DOT__wb_active_q;
+        CData/*0:0*/ obi2wb__DOT__obi_gnt_q;
         CData/*0:0*/ obi2wb__DOT__obi_rvalid_q;
-        CData/*0:0*/ obi2wb__DOT__immediate_ack;
         CData/*0:0*/ obi2wb__DOT____Vtogcov__clk_i;
         CData/*0:0*/ obi2wb__DOT____Vtogcov__rst_ni;
         CData/*0:0*/ obi2wb__DOT____Vtogcov__obi_req_i;
@@ -55,8 +56,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vobi2wb___024root final : public VerilatedMod
         CData/*3:0*/ obi2wb__DOT____Vtogcov__be_q;
         CData/*0:0*/ obi2wb__DOT____Vtogcov__we_q;
         CData/*0:0*/ obi2wb__DOT____Vtogcov__req_sent_q;
+        CData/*0:0*/ obi2wb__DOT____Vtogcov__wb_active_q;
+        CData/*0:0*/ obi2wb__DOT____Vtogcov__obi_gnt_q;
         CData/*0:0*/ obi2wb__DOT____Vtogcov__obi_rvalid_q;
-        CData/*0:0*/ obi2wb__DOT____Vtogcov__immediate_ack;
         CData/*0:0*/ __VstlFirstIteration;
         CData/*0:0*/ __VicoFirstIteration;
         CData/*0:0*/ __Vtrigprevexpr___TOP__clk_i__0;
@@ -79,10 +81,10 @@ class alignas(VL_CACHE_LINE_BYTES) Vobi2wb___024root final : public VerilatedMod
         IData/*31:0*/ obi2wb__DOT____Vtogcov__wb_dat_i;
         IData/*31:0*/ obi2wb__DOT____Vtogcov__addr_q;
         IData/*31:0*/ obi2wb__DOT____Vtogcov__wdata_q;
-        IData/*31:0*/ obi2wb__DOT____Vtogcov__rdata_q;
-        IData/*31:0*/ __VactIterCount;
     };
     struct {
+        IData/*31:0*/ obi2wb__DOT____Vtogcov__rdata_q;
+        IData/*31:0*/ __VactIterCount;
         VlUnpacked<CData/*0:0*/, 2> __Vm_traceActivity;
     };
     VlTriggerVec<1> __VstlTriggered;

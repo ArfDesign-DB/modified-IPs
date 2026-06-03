@@ -28,6 +28,15 @@ VL_INLINE_OPT void Vobi2wb___024root___ico_sequent__TOP__0(Vobi2wb___024root* vl
     Vobi2wb__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vobi2wb___024root___ico_sequent__TOP__0\n"); );
     // Body
+    if ((1U & (~ (IData)(vlSelf->obi2wb__DOT__state_q)))) {
+        if ((1U & (~ ((IData)(vlSelf->obi_req_i) & 
+                      (~ (IData)(vlSelf->obi2wb__DOT__req_sent_q)))))) {
+            ++(vlSymsp->__Vcoverage[329]);
+        }
+        if (((IData)(vlSelf->obi_req_i) & (~ (IData)(vlSelf->obi2wb__DOT__req_sent_q)))) {
+            ++(vlSymsp->__Vcoverage[328]);
+        }
+    }
     if (((IData)(vlSelf->clk_i) ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__clk_i))) {
         ++(vlSymsp->__Vcoverage[0]);
         vlSelf->obi2wb__DOT____Vtogcov__clk_i = vlSelf->clk_i;
@@ -76,6 +85,23 @@ VL_INLINE_OPT void Vobi2wb___024root___ico_sequent__TOP__0(Vobi2wb___024root* vl
         vlSelf->obi2wb__DOT____Vtogcov__obi_be_i = 
             ((7U & (IData)(vlSelf->obi2wb__DOT____Vtogcov__obi_be_i)) 
              | (8U & (IData)(vlSelf->obi_be_i)));
+    }
+    if (vlSelf->obi2wb__DOT__state_q) {
+        vlSelf->obi2wb__DOT__state_d = 1U;
+        if (vlSelf->obi2wb__DOT__state_q) {
+            if (vlSelf->wb_ack_i) {
+                ++(vlSymsp->__Vcoverage[331]);
+                vlSelf->obi2wb__DOT__state_d = 0U;
+            }
+            if ((1U & (~ (IData)(vlSelf->wb_ack_i)))) {
+                ++(vlSymsp->__Vcoverage[332]);
+            }
+        }
+    } else {
+        vlSelf->obi2wb__DOT__state_d = 0U;
+        if (((IData)(vlSelf->obi_req_i) & (~ (IData)(vlSelf->obi2wb__DOT__req_sent_q)))) {
+            vlSelf->obi2wb__DOT__state_d = 1U;
+        }
     }
     if ((1U & (vlSelf->obi_addr_i ^ vlSelf->obi2wb__DOT____Vtogcov__obi_addr_i))) {
         ++(vlSymsp->__Vcoverage[4]);
@@ -656,705 +682,9 @@ VL_INLINE_OPT void Vobi2wb___024root___ico_sequent__TOP__0(Vobi2wb___024root* vl
             ((0x7fffffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_i) 
              | (0x80000000U & vlSelf->wb_dat_i));
     }
-    vlSelf->obi_gnt_o = ((~ (IData)(vlSelf->obi2wb__DOT__state_q)) 
-                         & ((~ ((IData)(vlSelf->obi2wb__DOT__req_sent_q) 
-                                | (IData)(vlSelf->wb_stall_i))) 
-                            & (IData)(vlSelf->obi_req_i)));
-    if ((1U & (~ (IData)(vlSelf->obi2wb__DOT__state_q)))) {
-        if (vlSelf->obi_gnt_o) {
-            ++(vlSymsp->__Vcoverage[319]);
-            if (vlSelf->wb_ack_i) {
-                ++(vlSymsp->__Vcoverage[317]);
-            }
-            if ((1U & (~ (IData)(vlSelf->wb_ack_i)))) {
-                ++(vlSymsp->__Vcoverage[318]);
-            }
-        }
-        if ((1U & (~ (IData)(vlSelf->obi_gnt_o)))) {
-            ++(vlSymsp->__Vcoverage[320]);
-        }
-    }
-    if (((IData)(vlSelf->obi_gnt_o) ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__obi_gnt_o))) {
-        ++(vlSymsp->__Vcoverage[3]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_gnt_o = vlSelf->obi_gnt_o;
-    }
-    vlSelf->wb_cyc_o = 0U;
-    vlSelf->wb_stb_o = 0U;
-    if (vlSelf->obi2wb__DOT__state_q) {
-        vlSelf->obi2wb__DOT__state_d = 1U;
-        vlSelf->wb_we_o = vlSelf->obi2wb__DOT__we_q;
-        vlSelf->wb_sel_o = vlSelf->obi2wb__DOT__be_q;
-        vlSelf->wb_adr_o = vlSelf->obi2wb__DOT__addr_q;
-        vlSelf->wb_dat_o = vlSelf->obi2wb__DOT__wdata_q;
-        if (vlSelf->obi2wb__DOT__state_q) {
-            if ((1U & (~ (IData)(vlSelf->wb_ack_i)))) {
-                ++(vlSymsp->__Vcoverage[323]);
-            }
-            vlSelf->wb_cyc_o = 1U;
-            vlSelf->wb_stb_o = 1U;
-            if (vlSelf->wb_ack_i) {
-                ++(vlSymsp->__Vcoverage[322]);
-                vlSelf->wb_stb_o = 0U;
-                vlSelf->obi2wb__DOT__state_d = 0U;
-            }
-            vlSelf->wb_we_o = vlSelf->obi2wb__DOT__we_q;
-            vlSelf->wb_sel_o = vlSelf->obi2wb__DOT__be_q;
-            vlSelf->wb_adr_o = vlSelf->obi2wb__DOT__addr_q;
-            vlSelf->wb_dat_o = vlSelf->obi2wb__DOT__wdata_q;
-        }
-    } else {
-        vlSelf->obi2wb__DOT__state_d = 0U;
-        vlSelf->wb_we_o = vlSelf->obi2wb__DOT__we_q;
-        vlSelf->wb_sel_o = vlSelf->obi2wb__DOT__be_q;
-        vlSelf->wb_adr_o = vlSelf->obi2wb__DOT__addr_q;
-        vlSelf->wb_dat_o = vlSelf->obi2wb__DOT__wdata_q;
-        if (vlSelf->obi_gnt_o) {
-            vlSelf->wb_cyc_o = 1U;
-            vlSelf->wb_stb_o = 1U;
-            vlSelf->obi2wb__DOT__state_d = (1U & (~ (IData)(vlSelf->wb_ack_i)));
-            vlSelf->wb_we_o = vlSelf->obi_we_i;
-            vlSelf->wb_sel_o = vlSelf->obi_be_i;
-            vlSelf->wb_adr_o = vlSelf->obi_addr_i;
-            vlSelf->wb_dat_o = vlSelf->obi_wdata_i;
-        }
-    }
-    vlSelf->obi2wb__DOT__immediate_ack = ((IData)(vlSelf->obi_gnt_o) 
-                                          & (IData)(vlSelf->wb_ack_i));
-    if (((IData)(vlSelf->wb_cyc_o) ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__wb_cyc_o))) {
-        ++(vlSymsp->__Vcoverage[106]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_cyc_o = vlSelf->wb_cyc_o;
-    }
-    if (((IData)(vlSelf->wb_stb_o) ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__wb_stb_o))) {
-        ++(vlSymsp->__Vcoverage[107]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_stb_o = vlSelf->wb_stb_o;
-    }
     if (((IData)(vlSelf->obi2wb__DOT__state_d) ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__state_d))) {
         ++(vlSymsp->__Vcoverage[212]);
         vlSelf->obi2wb__DOT____Vtogcov__state_d = vlSelf->obi2wb__DOT__state_d;
-    }
-    if (((IData)(vlSelf->wb_we_o) ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__wb_we_o))) {
-        ++(vlSymsp->__Vcoverage[108]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_we_o = vlSelf->wb_we_o;
-    }
-    if ((1U & ((IData)(vlSelf->wb_sel_o) ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__wb_sel_o)))) {
-        ++(vlSymsp->__Vcoverage[173]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_sel_o = 
-            ((0xeU & (IData)(vlSelf->obi2wb__DOT____Vtogcov__wb_sel_o)) 
-             | (1U & (IData)(vlSelf->wb_sel_o)));
-    }
-    if ((2U & ((IData)(vlSelf->wb_sel_o) ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__wb_sel_o)))) {
-        ++(vlSymsp->__Vcoverage[174]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_sel_o = 
-            ((0xdU & (IData)(vlSelf->obi2wb__DOT____Vtogcov__wb_sel_o)) 
-             | (2U & (IData)(vlSelf->wb_sel_o)));
-    }
-    if ((4U & ((IData)(vlSelf->wb_sel_o) ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__wb_sel_o)))) {
-        ++(vlSymsp->__Vcoverage[175]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_sel_o = 
-            ((0xbU & (IData)(vlSelf->obi2wb__DOT____Vtogcov__wb_sel_o)) 
-             | (4U & (IData)(vlSelf->wb_sel_o)));
-    }
-    if ((8U & ((IData)(vlSelf->wb_sel_o) ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__wb_sel_o)))) {
-        ++(vlSymsp->__Vcoverage[176]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_sel_o = 
-            ((7U & (IData)(vlSelf->obi2wb__DOT____Vtogcov__wb_sel_o)) 
-             | (8U & (IData)(vlSelf->wb_sel_o)));
-    }
-    if ((1U & (vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o))) {
-        ++(vlSymsp->__Vcoverage[109]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0xfffffffeU & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (1U & vlSelf->wb_adr_o));
-    }
-    if ((2U & (vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o))) {
-        ++(vlSymsp->__Vcoverage[110]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0xfffffffdU & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (2U & vlSelf->wb_adr_o));
-    }
-    if ((4U & (vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o))) {
-        ++(vlSymsp->__Vcoverage[111]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0xfffffffbU & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (4U & vlSelf->wb_adr_o));
-    }
-    if ((8U & (vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o))) {
-        ++(vlSymsp->__Vcoverage[112]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0xfffffff7U & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (8U & vlSelf->wb_adr_o));
-    }
-    if ((0x10U & (vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o))) {
-        ++(vlSymsp->__Vcoverage[113]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0xffffffefU & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (0x10U & vlSelf->wb_adr_o));
-    }
-    if ((0x20U & (vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o))) {
-        ++(vlSymsp->__Vcoverage[114]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0xffffffdfU & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (0x20U & vlSelf->wb_adr_o));
-    }
-    if ((0x40U & (vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o))) {
-        ++(vlSymsp->__Vcoverage[115]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0xffffffbfU & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (0x40U & vlSelf->wb_adr_o));
-    }
-    if ((0x80U & (vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o))) {
-        ++(vlSymsp->__Vcoverage[116]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0xffffff7fU & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (0x80U & vlSelf->wb_adr_o));
-    }
-    if ((0x100U & (vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o))) {
-        ++(vlSymsp->__Vcoverage[117]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0xfffffeffU & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (0x100U & vlSelf->wb_adr_o));
-    }
-    if ((0x200U & (vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o))) {
-        ++(vlSymsp->__Vcoverage[118]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0xfffffdffU & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (0x200U & vlSelf->wb_adr_o));
-    }
-    if ((0x400U & (vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o))) {
-        ++(vlSymsp->__Vcoverage[119]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0xfffffbffU & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (0x400U & vlSelf->wb_adr_o));
-    }
-    if ((0x800U & (vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o))) {
-        ++(vlSymsp->__Vcoverage[120]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0xfffff7ffU & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (0x800U & vlSelf->wb_adr_o));
-    }
-    if ((0x1000U & (vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o))) {
-        ++(vlSymsp->__Vcoverage[121]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0xffffefffU & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (0x1000U & vlSelf->wb_adr_o));
-    }
-    if ((0x2000U & (vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o))) {
-        ++(vlSymsp->__Vcoverage[122]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0xffffdfffU & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (0x2000U & vlSelf->wb_adr_o));
-    }
-    if ((0x4000U & (vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o))) {
-        ++(vlSymsp->__Vcoverage[123]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0xffffbfffU & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (0x4000U & vlSelf->wb_adr_o));
-    }
-    if ((0x8000U & (vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o))) {
-        ++(vlSymsp->__Vcoverage[124]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0xffff7fffU & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (0x8000U & vlSelf->wb_adr_o));
-    }
-    if ((0x10000U & (vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o))) {
-        ++(vlSymsp->__Vcoverage[125]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0xfffeffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (0x10000U & vlSelf->wb_adr_o));
-    }
-    if ((0x20000U & (vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o))) {
-        ++(vlSymsp->__Vcoverage[126]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0xfffdffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (0x20000U & vlSelf->wb_adr_o));
-    }
-    if ((0x40000U & (vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o))) {
-        ++(vlSymsp->__Vcoverage[127]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0xfffbffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (0x40000U & vlSelf->wb_adr_o));
-    }
-    if ((0x80000U & (vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o))) {
-        ++(vlSymsp->__Vcoverage[128]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0xfff7ffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (0x80000U & vlSelf->wb_adr_o));
-    }
-    if ((0x100000U & (vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o))) {
-        ++(vlSymsp->__Vcoverage[129]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0xffefffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (0x100000U & vlSelf->wb_adr_o));
-    }
-    if ((0x200000U & (vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o))) {
-        ++(vlSymsp->__Vcoverage[130]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0xffdfffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (0x200000U & vlSelf->wb_adr_o));
-    }
-    if ((0x400000U & (vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o))) {
-        ++(vlSymsp->__Vcoverage[131]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0xffbfffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (0x400000U & vlSelf->wb_adr_o));
-    }
-    if ((0x800000U & (vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o))) {
-        ++(vlSymsp->__Vcoverage[132]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0xff7fffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (0x800000U & vlSelf->wb_adr_o));
-    }
-    if ((0x1000000U & (vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o))) {
-        ++(vlSymsp->__Vcoverage[133]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0xfeffffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (0x1000000U & vlSelf->wb_adr_o));
-    }
-    if ((0x2000000U & (vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o))) {
-        ++(vlSymsp->__Vcoverage[134]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0xfdffffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (0x2000000U & vlSelf->wb_adr_o));
-    }
-    if ((0x4000000U & (vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o))) {
-        ++(vlSymsp->__Vcoverage[135]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0xfbffffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (0x4000000U & vlSelf->wb_adr_o));
-    }
-    if ((0x8000000U & (vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o))) {
-        ++(vlSymsp->__Vcoverage[136]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0xf7ffffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (0x8000000U & vlSelf->wb_adr_o));
-    }
-    if ((0x10000000U & (vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o))) {
-        ++(vlSymsp->__Vcoverage[137]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0xefffffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (0x10000000U & vlSelf->wb_adr_o));
-    }
-    if ((0x20000000U & (vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o))) {
-        ++(vlSymsp->__Vcoverage[138]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0xdfffffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (0x20000000U & vlSelf->wb_adr_o));
-    }
-    if ((0x40000000U & (vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o))) {
-        ++(vlSymsp->__Vcoverage[139]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0xbfffffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (0x40000000U & vlSelf->wb_adr_o));
-    }
-    if (((vlSelf->wb_adr_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-         >> 0x1fU)) {
-        ++(vlSymsp->__Vcoverage[140]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o = 
-            ((0x7fffffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_adr_o) 
-             | (0x80000000U & vlSelf->wb_adr_o));
-    }
-    if ((1U & (vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o))) {
-        ++(vlSymsp->__Vcoverage[141]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0xfffffffeU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (1U & vlSelf->wb_dat_o));
-    }
-    if ((2U & (vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o))) {
-        ++(vlSymsp->__Vcoverage[142]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0xfffffffdU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (2U & vlSelf->wb_dat_o));
-    }
-    if ((4U & (vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o))) {
-        ++(vlSymsp->__Vcoverage[143]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0xfffffffbU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (4U & vlSelf->wb_dat_o));
-    }
-    if ((8U & (vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o))) {
-        ++(vlSymsp->__Vcoverage[144]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0xfffffff7U & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (8U & vlSelf->wb_dat_o));
-    }
-    if ((0x10U & (vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o))) {
-        ++(vlSymsp->__Vcoverage[145]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0xffffffefU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (0x10U & vlSelf->wb_dat_o));
-    }
-    if ((0x20U & (vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o))) {
-        ++(vlSymsp->__Vcoverage[146]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0xffffffdfU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (0x20U & vlSelf->wb_dat_o));
-    }
-    if ((0x40U & (vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o))) {
-        ++(vlSymsp->__Vcoverage[147]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0xffffffbfU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (0x40U & vlSelf->wb_dat_o));
-    }
-    if ((0x80U & (vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o))) {
-        ++(vlSymsp->__Vcoverage[148]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0xffffff7fU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (0x80U & vlSelf->wb_dat_o));
-    }
-    if ((0x100U & (vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o))) {
-        ++(vlSymsp->__Vcoverage[149]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0xfffffeffU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (0x100U & vlSelf->wb_dat_o));
-    }
-    if ((0x200U & (vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o))) {
-        ++(vlSymsp->__Vcoverage[150]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0xfffffdffU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (0x200U & vlSelf->wb_dat_o));
-    }
-    if ((0x400U & (vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o))) {
-        ++(vlSymsp->__Vcoverage[151]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0xfffffbffU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (0x400U & vlSelf->wb_dat_o));
-    }
-    if ((0x800U & (vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o))) {
-        ++(vlSymsp->__Vcoverage[152]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0xfffff7ffU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (0x800U & vlSelf->wb_dat_o));
-    }
-    if ((0x1000U & (vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o))) {
-        ++(vlSymsp->__Vcoverage[153]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0xffffefffU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (0x1000U & vlSelf->wb_dat_o));
-    }
-    if ((0x2000U & (vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o))) {
-        ++(vlSymsp->__Vcoverage[154]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0xffffdfffU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (0x2000U & vlSelf->wb_dat_o));
-    }
-    if ((0x4000U & (vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o))) {
-        ++(vlSymsp->__Vcoverage[155]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0xffffbfffU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (0x4000U & vlSelf->wb_dat_o));
-    }
-    if ((0x8000U & (vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o))) {
-        ++(vlSymsp->__Vcoverage[156]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0xffff7fffU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (0x8000U & vlSelf->wb_dat_o));
-    }
-    if ((0x10000U & (vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o))) {
-        ++(vlSymsp->__Vcoverage[157]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0xfffeffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (0x10000U & vlSelf->wb_dat_o));
-    }
-    if ((0x20000U & (vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o))) {
-        ++(vlSymsp->__Vcoverage[158]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0xfffdffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (0x20000U & vlSelf->wb_dat_o));
-    }
-    if ((0x40000U & (vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o))) {
-        ++(vlSymsp->__Vcoverage[159]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0xfffbffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (0x40000U & vlSelf->wb_dat_o));
-    }
-    if ((0x80000U & (vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o))) {
-        ++(vlSymsp->__Vcoverage[160]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0xfff7ffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (0x80000U & vlSelf->wb_dat_o));
-    }
-    if ((0x100000U & (vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o))) {
-        ++(vlSymsp->__Vcoverage[161]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0xffefffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (0x100000U & vlSelf->wb_dat_o));
-    }
-    if ((0x200000U & (vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o))) {
-        ++(vlSymsp->__Vcoverage[162]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0xffdfffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (0x200000U & vlSelf->wb_dat_o));
-    }
-    if ((0x400000U & (vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o))) {
-        ++(vlSymsp->__Vcoverage[163]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0xffbfffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (0x400000U & vlSelf->wb_dat_o));
-    }
-    if ((0x800000U & (vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o))) {
-        ++(vlSymsp->__Vcoverage[164]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0xff7fffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (0x800000U & vlSelf->wb_dat_o));
-    }
-    if ((0x1000000U & (vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o))) {
-        ++(vlSymsp->__Vcoverage[165]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0xfeffffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (0x1000000U & vlSelf->wb_dat_o));
-    }
-    if ((0x2000000U & (vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o))) {
-        ++(vlSymsp->__Vcoverage[166]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0xfdffffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (0x2000000U & vlSelf->wb_dat_o));
-    }
-    if ((0x4000000U & (vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o))) {
-        ++(vlSymsp->__Vcoverage[167]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0xfbffffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (0x4000000U & vlSelf->wb_dat_o));
-    }
-    if ((0x8000000U & (vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o))) {
-        ++(vlSymsp->__Vcoverage[168]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0xf7ffffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (0x8000000U & vlSelf->wb_dat_o));
-    }
-    if ((0x10000000U & (vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o))) {
-        ++(vlSymsp->__Vcoverage[169]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0xefffffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (0x10000000U & vlSelf->wb_dat_o));
-    }
-    if ((0x20000000U & (vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o))) {
-        ++(vlSymsp->__Vcoverage[170]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0xdfffffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (0x20000000U & vlSelf->wb_dat_o));
-    }
-    if ((0x40000000U & (vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o))) {
-        ++(vlSymsp->__Vcoverage[171]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0xbfffffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (0x40000000U & vlSelf->wb_dat_o));
-    }
-    if (((vlSelf->wb_dat_o ^ vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-         >> 0x1fU)) {
-        ++(vlSymsp->__Vcoverage[172]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o = 
-            ((0x7fffffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
-             | (0x80000000U & vlSelf->wb_dat_o));
-    }
-    if (((IData)(vlSelf->obi2wb__DOT__immediate_ack) 
-         ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__immediate_ack))) {
-        ++(vlSymsp->__Vcoverage[316]);
-        vlSelf->obi2wb__DOT____Vtogcov__immediate_ack 
-            = vlSelf->obi2wb__DOT__immediate_ack;
-    }
-    vlSelf->obi_rvalid_o = ((IData)(vlSelf->obi2wb__DOT__immediate_ack) 
-                            | (IData)(vlSelf->obi2wb__DOT__obi_rvalid_q));
-    vlSelf->obi_rdata_o = ((IData)(vlSelf->obi2wb__DOT__immediate_ack)
-                            ? ((IData)(vlSelf->obi_we_i)
-                                ? 0U : vlSelf->wb_dat_i)
-                            : vlSelf->obi2wb__DOT__rdata_q);
-    if (((IData)(vlSelf->obi_rvalid_o) ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__obi_rvalid_o))) {
-        ++(vlSymsp->__Vcoverage[73]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rvalid_o 
-            = vlSelf->obi_rvalid_o;
-    }
-    if ((1U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
-        ++(vlSymsp->__Vcoverage[74]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0xfffffffeU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (1U & vlSelf->obi_rdata_o));
-    }
-    if ((2U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
-        ++(vlSymsp->__Vcoverage[75]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0xfffffffdU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (2U & vlSelf->obi_rdata_o));
-    }
-    if ((4U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
-        ++(vlSymsp->__Vcoverage[76]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0xfffffffbU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (4U & vlSelf->obi_rdata_o));
-    }
-    if ((8U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
-        ++(vlSymsp->__Vcoverage[77]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0xfffffff7U & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (8U & vlSelf->obi_rdata_o));
-    }
-    if ((0x10U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
-        ++(vlSymsp->__Vcoverage[78]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0xffffffefU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (0x10U & vlSelf->obi_rdata_o));
-    }
-    if ((0x20U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
-        ++(vlSymsp->__Vcoverage[79]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0xffffffdfU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (0x20U & vlSelf->obi_rdata_o));
-    }
-    if ((0x40U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
-        ++(vlSymsp->__Vcoverage[80]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0xffffffbfU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (0x40U & vlSelf->obi_rdata_o));
-    }
-    if ((0x80U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
-        ++(vlSymsp->__Vcoverage[81]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0xffffff7fU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (0x80U & vlSelf->obi_rdata_o));
-    }
-    if ((0x100U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
-        ++(vlSymsp->__Vcoverage[82]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0xfffffeffU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (0x100U & vlSelf->obi_rdata_o));
-    }
-    if ((0x200U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
-        ++(vlSymsp->__Vcoverage[83]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0xfffffdffU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (0x200U & vlSelf->obi_rdata_o));
-    }
-    if ((0x400U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
-        ++(vlSymsp->__Vcoverage[84]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0xfffffbffU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (0x400U & vlSelf->obi_rdata_o));
-    }
-    if ((0x800U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
-        ++(vlSymsp->__Vcoverage[85]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0xfffff7ffU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (0x800U & vlSelf->obi_rdata_o));
-    }
-    if ((0x1000U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
-        ++(vlSymsp->__Vcoverage[86]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0xffffefffU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (0x1000U & vlSelf->obi_rdata_o));
-    }
-    if ((0x2000U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
-        ++(vlSymsp->__Vcoverage[87]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0xffffdfffU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (0x2000U & vlSelf->obi_rdata_o));
-    }
-    if ((0x4000U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
-        ++(vlSymsp->__Vcoverage[88]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0xffffbfffU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (0x4000U & vlSelf->obi_rdata_o));
-    }
-    if ((0x8000U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
-        ++(vlSymsp->__Vcoverage[89]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0xffff7fffU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (0x8000U & vlSelf->obi_rdata_o));
-    }
-    if ((0x10000U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
-        ++(vlSymsp->__Vcoverage[90]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0xfffeffffU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (0x10000U & vlSelf->obi_rdata_o));
-    }
-    if ((0x20000U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
-        ++(vlSymsp->__Vcoverage[91]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0xfffdffffU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (0x20000U & vlSelf->obi_rdata_o));
-    }
-    if ((0x40000U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
-        ++(vlSymsp->__Vcoverage[92]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0xfffbffffU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (0x40000U & vlSelf->obi_rdata_o));
-    }
-    if ((0x80000U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
-        ++(vlSymsp->__Vcoverage[93]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0xfff7ffffU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (0x80000U & vlSelf->obi_rdata_o));
-    }
-    if ((0x100000U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
-        ++(vlSymsp->__Vcoverage[94]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0xffefffffU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (0x100000U & vlSelf->obi_rdata_o));
-    }
-    if ((0x200000U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
-        ++(vlSymsp->__Vcoverage[95]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0xffdfffffU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (0x200000U & vlSelf->obi_rdata_o));
-    }
-    if ((0x400000U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
-        ++(vlSymsp->__Vcoverage[96]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0xffbfffffU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (0x400000U & vlSelf->obi_rdata_o));
-    }
-    if ((0x800000U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
-        ++(vlSymsp->__Vcoverage[97]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0xff7fffffU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (0x800000U & vlSelf->obi_rdata_o));
-    }
-    if ((0x1000000U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
-        ++(vlSymsp->__Vcoverage[98]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0xfeffffffU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (0x1000000U & vlSelf->obi_rdata_o));
-    }
-    if ((0x2000000U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
-        ++(vlSymsp->__Vcoverage[99]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0xfdffffffU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (0x2000000U & vlSelf->obi_rdata_o));
-    }
-    if ((0x4000000U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
-        ++(vlSymsp->__Vcoverage[100]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0xfbffffffU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (0x4000000U & vlSelf->obi_rdata_o));
-    }
-    if ((0x8000000U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
-        ++(vlSymsp->__Vcoverage[101]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0xf7ffffffU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (0x8000000U & vlSelf->obi_rdata_o));
-    }
-    if ((0x10000000U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
-        ++(vlSymsp->__Vcoverage[102]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0xefffffffU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (0x10000000U & vlSelf->obi_rdata_o));
-    }
-    if ((0x20000000U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
-        ++(vlSymsp->__Vcoverage[103]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0xdfffffffU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (0x20000000U & vlSelf->obi_rdata_o));
-    }
-    if ((0x40000000U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
-        ++(vlSymsp->__Vcoverage[104]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0xbfffffffU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (0x40000000U & vlSelf->obi_rdata_o));
-    }
-    if (((vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-         >> 0x1fU)) {
-        ++(vlSymsp->__Vcoverage[105]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
-            = ((0x7fffffffU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
-               | (0x80000000U & vlSelf->obi_rdata_o));
     }
 }
 
@@ -1384,51 +714,101 @@ VL_INLINE_OPT void Vobi2wb___024root___nba_sequent__TOP__0(Vobi2wb___024root* vl
     (void)vlSelf;  // Prevent unused variable warning
     Vobi2wb__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vobi2wb___024root___nba_sequent__TOP__0\n"); );
+    // Init
+    CData/*0:0*/ __Vdly__obi2wb__DOT__req_sent_q;
+    __Vdly__obi2wb__DOT__req_sent_q = 0;
     // Body
-    ++(vlSymsp->__Vcoverage[332]);
+    ++(vlSymsp->__Vcoverage[327]);
+    if ((1U & (~ (IData)(vlSelf->rst_ni)))) {
+        ++(vlSymsp->__Vcoverage[325]);
+    }
+    __Vdly__obi2wb__DOT__req_sent_q = vlSelf->obi2wb__DOT__req_sent_q;
     if (vlSelf->rst_ni) {
-        ++(vlSymsp->__Vcoverage[331]);
-        if ((1U & (~ ((IData)(vlSelf->obi_gnt_o) & 
-                      (~ (IData)(vlSelf->wb_ack_i)))))) {
-            ++(vlSymsp->__Vcoverage[327]);
-        }
+        ++(vlSymsp->__Vcoverage[326]);
         if ((1U & (~ ((IData)(vlSelf->obi2wb__DOT__state_q) 
                       & (IData)(vlSelf->wb_ack_i))))) {
-            ++(vlSymsp->__Vcoverage[329]);
+            ++(vlSymsp->__Vcoverage[324]);
         }
-        vlSelf->obi2wb__DOT__obi_rvalid_q = 0U;
-        if (((IData)(vlSelf->obi2wb__DOT__state_q) 
-             & (IData)(vlSelf->wb_ack_i))) {
-            ++(vlSymsp->__Vcoverage[328]);
+        if ((1U & (~ ((((~ (IData)(vlSelf->obi2wb__DOT__state_q)) 
+                        & (IData)(vlSelf->obi_req_i)) 
+                       & (~ (IData)(vlSelf->obi2wb__DOT__req_sent_q))) 
+                      & (~ (IData)(vlSelf->wb_stall_i)))))) {
+            ++(vlSymsp->__Vcoverage[319]);
+            if (((IData)(vlSelf->obi2wb__DOT__state_q) 
+                 & (IData)(vlSelf->wb_ack_i))) {
+                ++(vlSymsp->__Vcoverage[320]);
+            }
+            if ((1U & (~ ((IData)(vlSelf->obi2wb__DOT__state_q) 
+                          & (IData)(vlSelf->wb_ack_i))))) {
+                ++(vlSymsp->__Vcoverage[321]);
+            }
         }
-        if (((IData)(vlSelf->obi_gnt_o) & (~ (IData)(vlSelf->wb_ack_i)))) {
-            ++(vlSymsp->__Vcoverage[326]);
-            vlSelf->obi2wb__DOT__be_q = vlSelf->obi_be_i;
+        vlSelf->obi2wb__DOT__obi_gnt_q = 0U;
+        if (((((~ (IData)(vlSelf->obi2wb__DOT__state_q)) 
+               & (IData)(vlSelf->obi_req_i)) & (~ (IData)(vlSelf->obi2wb__DOT__req_sent_q))) 
+             & (~ (IData)(vlSelf->wb_stall_i)))) {
+            ++(vlSymsp->__Vcoverage[322]);
+            ++(vlSymsp->__Vcoverage[318]);
             vlSelf->obi2wb__DOT__addr_q = vlSelf->obi_addr_i;
             vlSelf->obi2wb__DOT__wdata_q = vlSelf->obi_wdata_i;
-            vlSelf->obi2wb__DOT__req_sent_q = 1U;
+            vlSelf->obi2wb__DOT__be_q = vlSelf->obi_be_i;
+            vlSelf->obi2wb__DOT__we_q = vlSelf->obi_we_i;
+            __Vdly__obi2wb__DOT__req_sent_q = 1U;
+            vlSelf->obi2wb__DOT__obi_gnt_q = 1U;
+            vlSelf->obi2wb__DOT__wb_active_q = 1U;
+        } else if (((IData)(vlSelf->obi2wb__DOT__state_q) 
+                    & (IData)(vlSelf->wb_ack_i))) {
+            vlSelf->obi2wb__DOT__wb_active_q = 0U;
         }
+        vlSelf->obi2wb__DOT__obi_rvalid_q = 0U;
         if (((IData)(vlSelf->obi2wb__DOT__state_q) 
              & (IData)(vlSelf->wb_ack_i))) {
-            vlSelf->obi2wb__DOT__rdata_q = ((IData)(vlSelf->obi2wb__DOT__we_q)
-                                             ? 0U : vlSelf->wb_dat_i);
+            ++(vlSymsp->__Vcoverage[323]);
+            vlSelf->obi2wb__DOT__rdata_q = vlSelf->wb_dat_i;
             vlSelf->obi2wb__DOT__obi_rvalid_q = 1U;
-            vlSelf->obi2wb__DOT__req_sent_q = 0U;
-        }
-        if (((IData)(vlSelf->obi_gnt_o) & (~ (IData)(vlSelf->wb_ack_i)))) {
-            vlSelf->obi2wb__DOT__we_q = vlSelf->obi_we_i;
+            __Vdly__obi2wb__DOT__req_sent_q = 0U;
         }
     } else {
-        vlSelf->obi2wb__DOT__be_q = 0U;
         vlSelf->obi2wb__DOT__addr_q = 0U;
         vlSelf->obi2wb__DOT__wdata_q = 0U;
-        vlSelf->obi2wb__DOT__rdata_q = 0U;
-        vlSelf->obi2wb__DOT__req_sent_q = 0U;
-        vlSelf->obi2wb__DOT__obi_rvalid_q = 0U;
+        vlSelf->obi2wb__DOT__be_q = 0U;
         vlSelf->obi2wb__DOT__we_q = 0U;
+        vlSelf->obi2wb__DOT__rdata_q = 0U;
+        __Vdly__obi2wb__DOT__req_sent_q = 0U;
+        vlSelf->obi2wb__DOT__wb_active_q = 0U;
+        vlSelf->obi2wb__DOT__obi_gnt_q = 0U;
+        vlSelf->obi2wb__DOT__obi_rvalid_q = 0U;
     }
-    if ((1U & (~ (IData)(vlSelf->rst_ni)))) {
-        ++(vlSymsp->__Vcoverage[330]);
+    vlSelf->obi2wb__DOT__req_sent_q = __Vdly__obi2wb__DOT__req_sent_q;
+    if (((IData)(vlSelf->obi2wb__DOT__obi_gnt_q) ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__obi_gnt_q))) {
+        ++(vlSymsp->__Vcoverage[316]);
+        vlSelf->obi2wb__DOT____Vtogcov__obi_gnt_q = vlSelf->obi2wb__DOT__obi_gnt_q;
+    }
+    vlSelf->obi_gnt_o = vlSelf->obi2wb__DOT__obi_gnt_q;
+    if (((IData)(vlSelf->obi2wb__DOT__obi_rvalid_q) 
+         ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__obi_rvalid_q))) {
+        ++(vlSymsp->__Vcoverage[317]);
+        vlSelf->obi2wb__DOT____Vtogcov__obi_rvalid_q 
+            = vlSelf->obi2wb__DOT__obi_rvalid_q;
+    }
+    vlSelf->obi_rvalid_o = vlSelf->obi2wb__DOT__obi_rvalid_q;
+    if (((IData)(vlSelf->obi2wb__DOT__we_q) ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__we_q))) {
+        ++(vlSymsp->__Vcoverage[281]);
+        vlSelf->obi2wb__DOT____Vtogcov__we_q = vlSelf->obi2wb__DOT__we_q;
+    }
+    vlSelf->wb_we_o = vlSelf->obi2wb__DOT__we_q;
+    if (((IData)(vlSelf->obi2wb__DOT__wb_active_q) 
+         ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__wb_active_q))) {
+        ++(vlSymsp->__Vcoverage[315]);
+        vlSelf->obi2wb__DOT____Vtogcov__wb_active_q 
+            = vlSelf->obi2wb__DOT__wb_active_q;
+    }
+    vlSelf->wb_cyc_o = vlSelf->obi2wb__DOT__wb_active_q;
+    vlSelf->wb_stb_o = vlSelf->obi2wb__DOT__wb_active_q;
+    if (((IData)(vlSelf->obi2wb__DOT__req_sent_q) ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__req_sent_q))) {
+        ++(vlSymsp->__Vcoverage[314]);
+        vlSelf->obi2wb__DOT____Vtogcov__req_sent_q 
+            = vlSelf->obi2wb__DOT__req_sent_q;
     }
     if ((1U & ((IData)(vlSelf->obi2wb__DOT__be_q) ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__be_q)))) {
         ++(vlSymsp->__Vcoverage[277]);
@@ -1458,6 +838,9 @@ VL_INLINE_OPT void Vobi2wb___024root___nba_sequent__TOP__0(Vobi2wb___024root* vl
                                                 | (8U 
                                                    & (IData)(vlSelf->obi2wb__DOT__be_q)));
     }
+    vlSelf->wb_sel_o = vlSelf->obi2wb__DOT__be_q;
+    vlSelf->obi2wb__DOT__state_q = ((IData)(vlSelf->rst_ni) 
+                                    && (IData)(vlSelf->obi2wb__DOT__state_d));
     if ((1U & (vlSelf->obi2wb__DOT__addr_q ^ vlSelf->obi2wb__DOT____Vtogcov__addr_q))) {
         ++(vlSymsp->__Vcoverage[213]);
         vlSelf->obi2wb__DOT____Vtogcov__addr_q = ((0xfffffffeU 
@@ -1690,6 +1073,7 @@ VL_INLINE_OPT void Vobi2wb___024root___nba_sequent__TOP__0(Vobi2wb___024root* vl
                                                   | (0x80000000U 
                                                      & vlSelf->obi2wb__DOT__addr_q));
     }
+    vlSelf->wb_adr_o = vlSelf->obi2wb__DOT__addr_q;
     if ((1U & (vlSelf->obi2wb__DOT__wdata_q ^ vlSelf->obi2wb__DOT____Vtogcov__wdata_q))) {
         ++(vlSymsp->__Vcoverage[245]);
         vlSelf->obi2wb__DOT____Vtogcov__wdata_q = (
@@ -1958,12 +1342,7 @@ VL_INLINE_OPT void Vobi2wb___024root___nba_sequent__TOP__0(Vobi2wb___024root* vl
                                                    | (0x80000000U 
                                                       & vlSelf->obi2wb__DOT__wdata_q));
     }
-    if (((IData)(vlSelf->obi2wb__DOT__obi_rvalid_q) 
-         ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__obi_rvalid_q))) {
-        ++(vlSymsp->__Vcoverage[315]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rvalid_q 
-            = vlSelf->obi2wb__DOT__obi_rvalid_q;
-    }
+    vlSelf->wb_dat_o = vlSelf->obi2wb__DOT__wdata_q;
     if ((1U & (vlSelf->obi2wb__DOT__rdata_q ^ vlSelf->obi2wb__DOT____Vtogcov__rdata_q))) {
         ++(vlSymsp->__Vcoverage[282]);
         vlSelf->obi2wb__DOT____Vtogcov__rdata_q = (
@@ -2232,87 +1611,20 @@ VL_INLINE_OPT void Vobi2wb___024root___nba_sequent__TOP__0(Vobi2wb___024root* vl
                                                    | (0x80000000U 
                                                       & vlSelf->obi2wb__DOT__rdata_q));
     }
-    if (((IData)(vlSelf->obi2wb__DOT__req_sent_q) ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__req_sent_q))) {
-        ++(vlSymsp->__Vcoverage[314]);
-        vlSelf->obi2wb__DOT____Vtogcov__req_sent_q 
-            = vlSelf->obi2wb__DOT__req_sent_q;
-    }
-    vlSelf->obi2wb__DOT__state_q = ((IData)(vlSelf->rst_ni) 
-                                    && (IData)(vlSelf->obi2wb__DOT__state_d));
-    if (((IData)(vlSelf->obi2wb__DOT__we_q) ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__we_q))) {
-        ++(vlSymsp->__Vcoverage[281]);
-        vlSelf->obi2wb__DOT____Vtogcov__we_q = vlSelf->obi2wb__DOT__we_q;
-    }
-    if (((IData)(vlSelf->obi2wb__DOT__state_q) ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__state_q))) {
-        ++(vlSymsp->__Vcoverage[211]);
-        vlSelf->obi2wb__DOT____Vtogcov__state_q = vlSelf->obi2wb__DOT__state_q;
-    }
-    vlSelf->obi_gnt_o = ((~ (IData)(vlSelf->obi2wb__DOT__state_q)) 
-                         & ((~ ((IData)(vlSelf->obi2wb__DOT__req_sent_q) 
-                                | (IData)(vlSelf->wb_stall_i))) 
-                            & (IData)(vlSelf->obi_req_i)));
-    if ((1U & (~ (IData)(vlSelf->obi2wb__DOT__state_q)))) {
-        ++(vlSymsp->__Vcoverage[321]);
-        if (vlSelf->obi_gnt_o) {
-            ++(vlSymsp->__Vcoverage[319]);
-            if (vlSelf->wb_ack_i) {
-                ++(vlSymsp->__Vcoverage[317]);
-            }
-            if ((1U & (~ (IData)(vlSelf->wb_ack_i)))) {
-                ++(vlSymsp->__Vcoverage[318]);
-            }
-        }
-        if ((1U & (~ (IData)(vlSelf->obi_gnt_o)))) {
-            ++(vlSymsp->__Vcoverage[320]);
-        }
-    }
+    vlSelf->obi_rdata_o = vlSelf->obi2wb__DOT__rdata_q;
     if (((IData)(vlSelf->obi_gnt_o) ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__obi_gnt_o))) {
         ++(vlSymsp->__Vcoverage[3]);
         vlSelf->obi2wb__DOT____Vtogcov__obi_gnt_o = vlSelf->obi_gnt_o;
     }
-    vlSelf->wb_cyc_o = 0U;
-    vlSelf->wb_stb_o = 0U;
-    if (vlSelf->obi2wb__DOT__state_q) {
-        vlSelf->obi2wb__DOT__state_d = 1U;
-        vlSelf->wb_we_o = vlSelf->obi2wb__DOT__we_q;
-        vlSelf->wb_sel_o = vlSelf->obi2wb__DOT__be_q;
-        vlSelf->wb_adr_o = vlSelf->obi2wb__DOT__addr_q;
-        vlSelf->wb_dat_o = vlSelf->obi2wb__DOT__wdata_q;
-        if (vlSelf->obi2wb__DOT__state_q) {
-            ++(vlSymsp->__Vcoverage[324]);
-            if ((1U & (~ (IData)(vlSelf->wb_ack_i)))) {
-                ++(vlSymsp->__Vcoverage[323]);
-            }
-            vlSelf->wb_cyc_o = 1U;
-            vlSelf->wb_stb_o = 1U;
-            if (vlSelf->wb_ack_i) {
-                ++(vlSymsp->__Vcoverage[322]);
-                vlSelf->wb_stb_o = 0U;
-                vlSelf->obi2wb__DOT__state_d = 0U;
-            }
-            vlSelf->wb_we_o = vlSelf->obi2wb__DOT__we_q;
-            vlSelf->wb_sel_o = vlSelf->obi2wb__DOT__be_q;
-            vlSelf->wb_adr_o = vlSelf->obi2wb__DOT__addr_q;
-            vlSelf->wb_dat_o = vlSelf->obi2wb__DOT__wdata_q;
-        }
-    } else {
-        vlSelf->obi2wb__DOT__state_d = 0U;
-        vlSelf->wb_we_o = vlSelf->obi2wb__DOT__we_q;
-        vlSelf->wb_sel_o = vlSelf->obi2wb__DOT__be_q;
-        vlSelf->wb_adr_o = vlSelf->obi2wb__DOT__addr_q;
-        vlSelf->wb_dat_o = vlSelf->obi2wb__DOT__wdata_q;
-        if (vlSelf->obi_gnt_o) {
-            vlSelf->wb_cyc_o = 1U;
-            vlSelf->wb_stb_o = 1U;
-            vlSelf->obi2wb__DOT__state_d = (1U & (~ (IData)(vlSelf->wb_ack_i)));
-            vlSelf->wb_we_o = vlSelf->obi_we_i;
-            vlSelf->wb_sel_o = vlSelf->obi_be_i;
-            vlSelf->wb_adr_o = vlSelf->obi_addr_i;
-            vlSelf->wb_dat_o = vlSelf->obi_wdata_i;
-        }
+    if (((IData)(vlSelf->obi_rvalid_o) ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__obi_rvalid_o))) {
+        ++(vlSymsp->__Vcoverage[73]);
+        vlSelf->obi2wb__DOT____Vtogcov__obi_rvalid_o 
+            = vlSelf->obi_rvalid_o;
     }
-    vlSelf->obi2wb__DOT__immediate_ack = ((IData)(vlSelf->obi_gnt_o) 
-                                          & (IData)(vlSelf->wb_ack_i));
+    if (((IData)(vlSelf->wb_we_o) ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__wb_we_o))) {
+        ++(vlSymsp->__Vcoverage[108]);
+        vlSelf->obi2wb__DOT____Vtogcov__wb_we_o = vlSelf->wb_we_o;
+    }
     if (((IData)(vlSelf->wb_cyc_o) ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__wb_cyc_o))) {
         ++(vlSymsp->__Vcoverage[106]);
         vlSelf->obi2wb__DOT____Vtogcov__wb_cyc_o = vlSelf->wb_cyc_o;
@@ -2320,14 +1632,6 @@ VL_INLINE_OPT void Vobi2wb___024root___nba_sequent__TOP__0(Vobi2wb___024root* vl
     if (((IData)(vlSelf->wb_stb_o) ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__wb_stb_o))) {
         ++(vlSymsp->__Vcoverage[107]);
         vlSelf->obi2wb__DOT____Vtogcov__wb_stb_o = vlSelf->wb_stb_o;
-    }
-    if (((IData)(vlSelf->obi2wb__DOT__state_d) ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__state_d))) {
-        ++(vlSymsp->__Vcoverage[212]);
-        vlSelf->obi2wb__DOT____Vtogcov__state_d = vlSelf->obi2wb__DOT__state_d;
-    }
-    if (((IData)(vlSelf->wb_we_o) ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__wb_we_o))) {
-        ++(vlSymsp->__Vcoverage[108]);
-        vlSelf->obi2wb__DOT____Vtogcov__wb_we_o = vlSelf->wb_we_o;
     }
     if ((1U & ((IData)(vlSelf->wb_sel_o) ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__wb_sel_o)))) {
         ++(vlSymsp->__Vcoverage[173]);
@@ -2739,23 +2043,6 @@ VL_INLINE_OPT void Vobi2wb___024root___nba_sequent__TOP__0(Vobi2wb___024root* vl
             ((0x7fffffffU & vlSelf->obi2wb__DOT____Vtogcov__wb_dat_o) 
              | (0x80000000U & vlSelf->wb_dat_o));
     }
-    if (((IData)(vlSelf->obi2wb__DOT__immediate_ack) 
-         ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__immediate_ack))) {
-        ++(vlSymsp->__Vcoverage[316]);
-        vlSelf->obi2wb__DOT____Vtogcov__immediate_ack 
-            = vlSelf->obi2wb__DOT__immediate_ack;
-    }
-    vlSelf->obi_rvalid_o = ((IData)(vlSelf->obi2wb__DOT__immediate_ack) 
-                            | (IData)(vlSelf->obi2wb__DOT__obi_rvalid_q));
-    vlSelf->obi_rdata_o = ((IData)(vlSelf->obi2wb__DOT__immediate_ack)
-                            ? ((IData)(vlSelf->obi_we_i)
-                                ? 0U : vlSelf->wb_dat_i)
-                            : vlSelf->obi2wb__DOT__rdata_q);
-    if (((IData)(vlSelf->obi_rvalid_o) ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__obi_rvalid_o))) {
-        ++(vlSymsp->__Vcoverage[73]);
-        vlSelf->obi2wb__DOT____Vtogcov__obi_rvalid_o 
-            = vlSelf->obi_rvalid_o;
-    }
     if ((1U & (vlSelf->obi_rdata_o ^ vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o))) {
         ++(vlSymsp->__Vcoverage[74]);
         vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
@@ -2948,5 +2235,41 @@ VL_INLINE_OPT void Vobi2wb___024root___nba_sequent__TOP__0(Vobi2wb___024root* vl
         vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o 
             = ((0x7fffffffU & vlSelf->obi2wb__DOT____Vtogcov__obi_rdata_o) 
                | (0x80000000U & vlSelf->obi_rdata_o));
+    }
+    if ((1U & (~ (IData)(vlSelf->obi2wb__DOT__state_q)))) {
+        ++(vlSymsp->__Vcoverage[330]);
+        if ((1U & (~ ((IData)(vlSelf->obi_req_i) & 
+                      (~ (IData)(vlSelf->obi2wb__DOT__req_sent_q)))))) {
+            ++(vlSymsp->__Vcoverage[329]);
+        }
+        if (((IData)(vlSelf->obi_req_i) & (~ (IData)(vlSelf->obi2wb__DOT__req_sent_q)))) {
+            ++(vlSymsp->__Vcoverage[328]);
+        }
+    }
+    if (((IData)(vlSelf->obi2wb__DOT__state_q) ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__state_q))) {
+        ++(vlSymsp->__Vcoverage[211]);
+        vlSelf->obi2wb__DOT____Vtogcov__state_q = vlSelf->obi2wb__DOT__state_q;
+    }
+    if (vlSelf->obi2wb__DOT__state_q) {
+        vlSelf->obi2wb__DOT__state_d = 1U;
+        if (vlSelf->obi2wb__DOT__state_q) {
+            ++(vlSymsp->__Vcoverage[333]);
+            if (vlSelf->wb_ack_i) {
+                ++(vlSymsp->__Vcoverage[331]);
+                vlSelf->obi2wb__DOT__state_d = 0U;
+            }
+            if ((1U & (~ (IData)(vlSelf->wb_ack_i)))) {
+                ++(vlSymsp->__Vcoverage[332]);
+            }
+        }
+    } else {
+        vlSelf->obi2wb__DOT__state_d = 0U;
+        if (((IData)(vlSelf->obi_req_i) & (~ (IData)(vlSelf->obi2wb__DOT__req_sent_q)))) {
+            vlSelf->obi2wb__DOT__state_d = 1U;
+        }
+    }
+    if (((IData)(vlSelf->obi2wb__DOT__state_d) ^ (IData)(vlSelf->obi2wb__DOT____Vtogcov__state_d))) {
+        ++(vlSymsp->__Vcoverage[212]);
+        vlSelf->obi2wb__DOT____Vtogcov__state_d = vlSelf->obi2wb__DOT__state_d;
     }
 }

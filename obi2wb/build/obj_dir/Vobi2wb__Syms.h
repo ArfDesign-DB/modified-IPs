@@ -30,7 +30,7 @@ class alignas(VL_CACHE_LINE_BYTES)Vobi2wb__Syms final : public VerilatedSyms {
     Vobi2wb___024root              TOP;
 
     // COVERAGE
-    uint32_t __Vcoverage[333];
+    uint32_t __Vcoverage[335];
 
     // CONSTRUCTORS
     Vobi2wb__Syms(VerilatedContext* contextp, const char* namep, Vobi2wb* modelp);

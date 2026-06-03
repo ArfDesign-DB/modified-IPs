@@ -182,8 +182,9 @@ VL_ATTR_COLD void Vobi2wb___024root___ctor_var_reset(Vobi2wb___024root* vlSelf) 
     vlSelf->obi2wb__DOT__we_q = VL_RAND_RESET_I(1);
     vlSelf->obi2wb__DOT__rdata_q = VL_RAND_RESET_I(32);
     vlSelf->obi2wb__DOT__req_sent_q = VL_RAND_RESET_I(1);
+    vlSelf->obi2wb__DOT__wb_active_q = VL_RAND_RESET_I(1);
+    vlSelf->obi2wb__DOT__obi_gnt_q = VL_RAND_RESET_I(1);
     vlSelf->obi2wb__DOT__obi_rvalid_q = VL_RAND_RESET_I(1);
-    vlSelf->obi2wb__DOT__immediate_ack = VL_RAND_RESET_I(1);
     vlSelf->obi2wb__DOT____Vtogcov__clk_i = VL_RAND_RESET_I(1);
     vlSelf->obi2wb__DOT____Vtogcov__rst_ni = VL_RAND_RESET_I(1);
     vlSelf->obi2wb__DOT____Vtogcov__obi_req_i = VL_RAND_RESET_I(1);
@@ -211,8 +212,9 @@ VL_ATTR_COLD void Vobi2wb___024root___ctor_var_reset(Vobi2wb___024root* vlSelf) 
     vlSelf->obi2wb__DOT____Vtogcov__we_q = VL_RAND_RESET_I(1);
     vlSelf->obi2wb__DOT____Vtogcov__rdata_q = VL_RAND_RESET_I(32);
     vlSelf->obi2wb__DOT____Vtogcov__req_sent_q = VL_RAND_RESET_I(1);
+    vlSelf->obi2wb__DOT____Vtogcov__wb_active_q = VL_RAND_RESET_I(1);
+    vlSelf->obi2wb__DOT____Vtogcov__obi_gnt_q = VL_RAND_RESET_I(1);
     vlSelf->obi2wb__DOT____Vtogcov__obi_rvalid_q = VL_RAND_RESET_I(1);
-    vlSelf->obi2wb__DOT____Vtogcov__immediate_ack = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigprevexpr___TOP__clk_i__0 = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigprevexpr___TOP__rst_ni__0 = VL_RAND_RESET_I(1);
     for (int __Vi0 = 0; __Vi0 < 2; ++__Vi0) {
