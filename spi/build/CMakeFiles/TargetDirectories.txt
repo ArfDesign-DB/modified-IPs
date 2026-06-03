@@ -1,0 +1,4 @@
+/home/hanumavva/Hanumavva/spi/build/CMakeFiles/verilate.dir
+/home/hanumavva/Hanumavva/spi/build/CMakeFiles/run.dir
+/home/hanumavva/Hanumavva/spi/build/CMakeFiles/edit_cache.dir
+/home/hanumavva/Hanumavva/spi/build/CMakeFiles/rebuild_cache.dir
