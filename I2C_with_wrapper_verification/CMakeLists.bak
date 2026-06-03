@@ -1,0 +1,49 @@
+cmake_minimum_required(VERSION 3.15)
+project(I2C_verif)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# ----------------------------
+# RTL sources
+# ----------------------------
+set(RTL_SOURCES
+    ${CMAKE_SOURCE_DIR}/rtl/timescale.v
+    ${CMAKE_SOURCE_DIR}/rtl/i2c_master_defines.v
+    ${CMAKE_SOURCE_DIR}/rtl/i2c_master_top.v
+    ${CMAKE_SOURCE_DIR}/rtl/i2c_master_bit_ctrl.v
+    ${CMAKE_SOURCE_DIR}/rtl/i2c_master_byte_ctrl.v
+)
+
+# ----------------------------
+# Build directory
+# ----------------------------
+set(OBJ_DIR ${CMAKE_BINARY_DIR}/obj_dir)
+
+# ----------------------------
+# Run Verilator + Build
+# ----------------------------
+add_custom_command(
+    OUTPUT ${OBJ_DIR}/Vi2c
+    COMMAND verilator
+        -Wall
+        --cc ${RTL_SOURCES}
+        --top-module i2c_master_top
+        --trace
+        --exe ${CMAKE_SOURCE_DIR}/tb/i2c_tb.cpp
+        --Mdir ${OBJ_DIR}
+    COMMAND make -C ${OBJ_DIR} -f Vi2c.mk -j
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+)
+
+add_custom_target(verilate ALL
+    DEPENDS ${OBJ_DIR}/Vi2c
+)
+
+# ----------------------------
+# Run target (optional)
+# ----------------------------
+add_custom_target(run
+    COMMAND ${OBJ_DIR}/Vi2c
+    DEPENDS verilate
+)

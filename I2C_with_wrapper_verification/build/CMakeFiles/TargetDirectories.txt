@@ -1,0 +1,4 @@
+/home/shrinidhi/IBEX/I2C/build/CMakeFiles/verilate.dir
+/home/shrinidhi/IBEX/I2C/build/CMakeFiles/run.dir
+/home/shrinidhi/IBEX/I2C/build/CMakeFiles/edit_cache.dir
+/home/shrinidhi/IBEX/I2C/build/CMakeFiles/rebuild_cache.dir
