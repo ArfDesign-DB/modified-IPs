@@ -1,4 +1,4 @@
-driver.o: ../../../tb/driver.cpp \
+driver.o: /home/arjun/modified-IPs/verification_gpio/sim/../tb/driver.cpp \
  /usr/local/share/verilator/include/verilated.h \
  /usr/local/share/verilator/include/verilatedos.h \
  /usr/local/share/verilator/include/verilated_config.h \
@@ -8,4 +8,4 @@ driver.o: ../../../tb/driver.cpp \
  /usr/local/share/verilator/include/verilated.h \
  /usr/local/share/verilator/include/verilated_trace.h Vgpio.h \
  /usr/local/share/verilator/include/verilated_cov.h \
- ../../../tb/gpio_cov.hpp
+ /home/arjun/modified-IPs/verification_gpio/sim/../tb/gpio_cov.hpp

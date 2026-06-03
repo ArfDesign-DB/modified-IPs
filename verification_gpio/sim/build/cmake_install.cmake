@@ -1,4 +1,4 @@
-# Install script for directory: /home/arjun/verif_gpio/sim
+# Install script for directory: /home/arjun/modified-IPs/verification_gpio/sim
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/arjun/verif_gpio/sim/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/arjun/modified-IPs/verification_gpio/sim/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

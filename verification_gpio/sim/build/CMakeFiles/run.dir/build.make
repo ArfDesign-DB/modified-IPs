@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/arjun/verif_gpio/sim
+CMAKE_SOURCE_DIR = /home/arjun/modified-IPs/verification_gpio/sim
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/arjun/verif_gpio/sim/build
+CMAKE_BINARY_DIR = /home/arjun/modified-IPs/verification_gpio/sim/build
 
 # Utility rule file for run.
 
@@ -67,7 +67,7 @@ include CMakeFiles/run.dir/compiler_depend.make
 include CMakeFiles/run.dir/progress.make
 
 CMakeFiles/run:
-	/home/arjun/verif_gpio/sim/build/obj_dir/Vgpio
+	/home/arjun/modified-IPs/verification_gpio/sim/build/obj_dir/Vgpio
 
 run: CMakeFiles/run
 run: CMakeFiles/run.dir/build.make
@@ -82,6 +82,6 @@ CMakeFiles/run.dir/clean:
 .PHONY : CMakeFiles/run.dir/clean
 
 CMakeFiles/run.dir/depend:
-	cd /home/arjun/verif_gpio/sim/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/arjun/verif_gpio/sim /home/arjun/verif_gpio/sim /home/arjun/verif_gpio/sim/build /home/arjun/verif_gpio/sim/build /home/arjun/verif_gpio/sim/build/CMakeFiles/run.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/arjun/modified-IPs/verification_gpio/sim/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/arjun/modified-IPs/verification_gpio/sim /home/arjun/modified-IPs/verification_gpio/sim /home/arjun/modified-IPs/verification_gpio/sim/build /home/arjun/modified-IPs/verification_gpio/sim/build /home/arjun/modified-IPs/verification_gpio/sim/build/CMakeFiles/run.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/run.dir/depend
 

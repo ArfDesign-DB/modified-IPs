@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/arjun/verif_gpio/sim
+CMAKE_SOURCE_DIR = /home/arjun/modified-IPs/verification_gpio/sim
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/arjun/verif_gpio/sim/build
+CMAKE_BINARY_DIR = /home/arjun/modified-IPs/verification_gpio/sim/build
 
 # Utility rule file for verilate.
 
@@ -68,15 +68,15 @@ include CMakeFiles/verilate.dir/progress.make
 
 CMakeFiles/verilate: obj_dir/Vgpio
 
-obj_dir/Vgpio: /home/arjun/verif_gpio/rtl/debounce.sv
-obj_dir/Vgpio: /home/arjun/verif_gpio/rtl/gpio.sv
-obj_dir/Vgpio: /home/arjun/verif_gpio/tb/top.cpp
-obj_dir/Vgpio: /home/arjun/verif_gpio/tb/driver.cpp
-obj_dir/Vgpio: /home/arjun/verif_gpio/tb/checker.cpp
-obj_dir/Vgpio: /home/arjun/verif_gpio/tb/ref.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/arjun/verif_gpio/sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating obj_dir/Vgpio"
-	cd /home/arjun/verif_gpio/sim && verilator -Wall --cc --trace --coverage --top-module gpio /home/arjun/verif_gpio/sim/../rtl/debounce.sv /home/arjun/verif_gpio/sim/../rtl/gpio.sv --exe /home/arjun/verif_gpio/sim/../tb/top.cpp /home/arjun/verif_gpio/sim/../tb/driver.cpp /home/arjun/verif_gpio/sim/../tb/checker.cpp /home/arjun/verif_gpio/sim/../tb/ref.cpp --Mdir /home/arjun/verif_gpio/sim/build/obj_dir
-	cd /home/arjun/verif_gpio/sim && make -C /home/arjun/verif_gpio/sim/build/obj_dir -f Vgpio.mk -j
+obj_dir/Vgpio: /home/arjun/modified-IPs/verification_gpio/rtl/debounce.sv
+obj_dir/Vgpio: /home/arjun/modified-IPs/verification_gpio/rtl/gpio.sv
+obj_dir/Vgpio: /home/arjun/modified-IPs/verification_gpio/tb/top.cpp
+obj_dir/Vgpio: /home/arjun/modified-IPs/verification_gpio/tb/driver.cpp
+obj_dir/Vgpio: /home/arjun/modified-IPs/verification_gpio/tb/checker.cpp
+obj_dir/Vgpio: /home/arjun/modified-IPs/verification_gpio/tb/ref.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/arjun/modified-IPs/verification_gpio/sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating obj_dir/Vgpio"
+	cd /home/arjun/modified-IPs/verification_gpio/sim && verilator -Wall --cc --trace --coverage --top-module gpio /home/arjun/modified-IPs/verification_gpio/sim/../rtl/debounce.sv /home/arjun/modified-IPs/verification_gpio/sim/../rtl/gpio.sv --exe /home/arjun/modified-IPs/verification_gpio/sim/../tb/top.cpp /home/arjun/modified-IPs/verification_gpio/sim/../tb/driver.cpp /home/arjun/modified-IPs/verification_gpio/sim/../tb/checker.cpp /home/arjun/modified-IPs/verification_gpio/sim/../tb/ref.cpp --Mdir /home/arjun/modified-IPs/verification_gpio/sim/build/obj_dir
+	cd /home/arjun/modified-IPs/verification_gpio/sim && make -C /home/arjun/modified-IPs/verification_gpio/sim/build/obj_dir -f Vgpio.mk -j
 
 verilate: CMakeFiles/verilate
 verilate: obj_dir/Vgpio
@@ -92,6 +92,6 @@ CMakeFiles/verilate.dir/clean:
 .PHONY : CMakeFiles/verilate.dir/clean
 
 CMakeFiles/verilate.dir/depend:
-	cd /home/arjun/verif_gpio/sim/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/arjun/verif_gpio/sim /home/arjun/verif_gpio/sim /home/arjun/verif_gpio/sim/build /home/arjun/verif_gpio/sim/build /home/arjun/verif_gpio/sim/build/CMakeFiles/verilate.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/arjun/modified-IPs/verification_gpio/sim/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/arjun/modified-IPs/verification_gpio/sim /home/arjun/modified-IPs/verification_gpio/sim /home/arjun/modified-IPs/verification_gpio/sim/build /home/arjun/modified-IPs/verification_gpio/sim/build /home/arjun/modified-IPs/verification_gpio/sim/build/CMakeFiles/verilate.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/verilate.dir/depend
 

@@ -1,1 +1,1 @@
-ref.o: ../../../tb/ref.cpp
+ref.o: /home/arjun/modified-IPs/verification_gpio/sim/../tb/ref.cpp

@@ -48,7 +48,7 @@ VM_USER_CLASSES = \
 
 # User .cpp directories (from .cpp's on Verilator command line)
 VM_USER_DIR = \
-	../../tb \
+	/home/arjun/modified-IPs/verification_gpio/sim/../tb \
 
 
 ### Default rules...
@@ -60,13 +60,13 @@ include $(VERILATOR_ROOT)/include/verilated.mk
 ### Executable rules... (from --exe)
 VPATH += $(VM_USER_DIR)
 
-checker.o: ../../tb/checker.cpp
+checker.o: /home/arjun/modified-IPs/verification_gpio/sim/../tb/checker.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-driver.o: ../../tb/driver.cpp
+driver.o: /home/arjun/modified-IPs/verification_gpio/sim/../tb/driver.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-ref.o: ../../tb/ref.cpp
+ref.o: /home/arjun/modified-IPs/verification_gpio/sim/../tb/ref.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-top.o: ../../tb/top.cpp
+top.o: /home/arjun/modified-IPs/verification_gpio/sim/../tb/top.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 
 ### Link rules... (from --exe)

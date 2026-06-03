@@ -50,7 +50,7 @@ VL_ATTR_COLD void Vgpio___024root___eval_settle(Vgpio___024root* vlSelf) {
 #ifdef VL_DEBUG
             Vgpio___024root___dump_triggers__stl(vlSelf);
 #endif
-            VL_FATAL_MT("../../rtl/gpio.sv", 38, "", "Settle region did not converge.");
+            VL_FATAL_MT("/home/arjun/modified-IPs/verification_gpio/sim/../rtl/gpio.sv", 38, "", "Settle region did not converge.");
         }
         __VstlIterCount = ((IData)(1U) + __VstlIterCount);
         __VstlContinue = 0U;

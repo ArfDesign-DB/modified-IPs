@@ -1,4 +1,5 @@
-top.o: ../../../tb/top.cpp /usr/local/share/verilator/include/verilated.h \
+top.o: /home/arjun/modified-IPs/verification_gpio/sim/../tb/top.cpp \
+ /usr/local/share/verilator/include/verilated.h \
  /usr/local/share/verilator/include/verilatedos.h \
  /usr/local/share/verilator/include/verilated_config.h \
  /usr/local/share/verilator/include/verilated_types.h \
@@ -7,4 +8,4 @@ top.o: ../../../tb/top.cpp /usr/local/share/verilator/include/verilated.h \
  /usr/local/share/verilator/include/verilated.h \
  /usr/local/share/verilator/include/verilated_trace.h \
  /usr/local/share/verilator/include/verilated_cov.h Vgpio.h \
- ../../../tb/gpio_cov.hpp
+ /home/arjun/modified-IPs/verification_gpio/sim/../tb/gpio_cov.hpp
