@@ -1,0 +1,6 @@
+# simulation outputs
+sim/*.vcd
+sim/*.dat
+sim/*.json
+sim/obj_dir/
+sim/reports/
