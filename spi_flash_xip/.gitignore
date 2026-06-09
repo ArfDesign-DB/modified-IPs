@@ -1,0 +1,33 @@
+# ==========================================
+# spi_flash_xip .gitignore
+# ==========================================
+
+# 1. Verilator Build Artifacts
+sim/obj_dir/
+*.o
+*.a
+*.so
+*.tmp
+
+# 2. Simulation Logs
+sim/logs/
+sim/*.log
+
+# 3. Waveform Dumps
+wave/
+*.vcd
+*.fst
+
+# 4. Coverage Databases & Reports
+coverage/
+*.dat
+*.json
+*_coverage.txt
+*_summary.txt
+merged_annotated/
+
+# 5. OS & Editor Hidden Files (Optional but recommended)
+.DS_Store
+*.swp
+.vscode/
+.idea/

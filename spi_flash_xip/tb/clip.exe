@@ -1,0 +1,69 @@
+#include "Vspi_flash_xip.h"
+#include "verilated.h"
+#include "verilated_vcd_c.h"
+#include "spi_flash_xip_tb_utils.h"
+
+#include <iostream>
+
+int main(int argc, char **argv) {
+
+    Verilated::commandArgs(argc, argv);
+    Verilated::traceEverOn(true);
+
+    auto* dut = new Vspi_flash_xip;
+    auto* tfp = new VerilatedVcdC;
+
+    dut->trace(tfp, 5);
+    tfp->open("../wave/TC_001.vcd");
+
+    dut->clk_i = 0;
+    dut->rst_ni = 0;
+    dut->xip_req_i = 0;
+    dut->xip_we_i = 0;
+    dut->spi_miso_i = 0;
+
+    reset_dut(dut, tfp);
+
+    uint32_t patterns[] = {
+        0x00000000,
+        0xFFFFFFFF,
+        0xAAAAAAAA,
+        0x55555555,
+        0x12345678,
+        0xDEADBEEF
+    };
+
+    for (auto pattern : patterns) {
+
+        dut->xip_addr_i = 0x123456;
+        dut->xip_we_i   = 0;
+        dut->xip_req_i  = 1;
+
+        bool done = false;
+
+        // FIX: stable MISO (DO NOT SHIFT EVERY CYCLE)
+        for (int cycle = 0; cycle < 1200; cycle++) {
+
+            // stable deterministic input (safe for FSM sampling)
+            dut->spi_miso_i = (pattern & 1);
+
+            tick(dut, tfp);
+
+            if (dut->xip_rvalid_o) {
+                done = true;
+                dut->xip_req_i = 0;
+                break;
+            }
+        }
+
+        if (!done) {
+            std::cerr << "FAIL TC_001 (pattern=0x"
+                      << std::hex << pattern << ")\n";
+            return 1;
+        }
+    }
+
+    std::cout << "PASS TC_001\n";
+    write_coverage("TC_001_spi_flash_xip_read_test");
+    return 0;
+}

@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+ROOT_DIR=$(cd "${SCRIPT_DIR}/.." && pwd)
+cd "${SCRIPT_DIR}"
+
+usage() {
+    cat <<USAGE
+Usage:
+  ./sim/run.sh --test <TEST_NAME>
+  ./sim/run.sh --regression
+
+Examples:
+  ./sim/run.sh --test TC_001_spi_flash_xip_read_test
+  ./sim/run.sh --regression
+USAGE
+}
+
+TESTS=(
+  TC_001_spi_flash_xip_read_test
+  TC_002_spi_flash_xip_back_to_back_read_test
+)
+
+run_one() {
+    local t="$1"
+    echo "[INFO] Running ${t}"
+    make clean >/dev/null
+    make run TEST="${t}"
+}
+
+if [[ $# -lt 1 ]]; then
+    usage
+    exit 1
+fi
+
+case "$1" in
+    --test)
+        [[ $# -eq 2 ]] || { usage; exit 1; }
+        run_one "$2"
+        ;;
+    --regression)
+        for t in "${TESTS[@]}"; do
+            run_one "${t}"
+        done
+        echo "[INFO] Regression complete."
+        ;;
+    -h|--help)
+        usage
+        ;;
+    *)
+        usage
+        exit 1
+        ;;
+esac
+
+echo "[INFO] Waveforms are available under ${ROOT_DIR}/wave"
+echo "[INFO] Coverage artifacts are available under ${ROOT_DIR}/coverage"

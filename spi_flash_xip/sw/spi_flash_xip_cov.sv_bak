@@ -1,0 +1,88 @@
+module spi_flash_xip_cov (
+    input logic clk_i,
+    input logic rst_ni,
+
+    input logic xip_req_i,
+    input logic xip_we_i,
+    input logic [23:0] xip_addr_i,
+    input logic xip_rvalid_o,
+
+    input logic spi_csn_o,
+    input logic spi_sck_o
+);
+
+    // ========================================================
+    // FUNCTIONAL COVERAGE (Verilator-Compatible via SVA)
+    // ========================================================
+
+    // 1. Command Types
+    c_cmd_read:  cover property (@(posedge clk_i) disable iff (!rst_ni) xip_req_i && !xip_we_i);
+    c_cmd_write: cover property (@(posedge clk_i) disable iff (!rst_ni) xip_req_i && xip_we_i);
+
+    // 2. Address Decode Regions
+    c_addr_region_low:  cover property (
+        @(posedge clk_i) disable iff (!rst_ni) 
+        xip_req_i && (xip_addr_i >= 24'h000000) && (xip_addr_i <= 24'h000FFF)
+    );
+    
+    c_addr_region_mid:  cover property (
+        @(posedge clk_i) disable iff (!rst_ni) 
+        xip_req_i && (xip_addr_i >= 24'h001000) && (xip_addr_i <= 24'hEFFFFF)
+    );
+    
+    c_addr_region_high: cover property (
+        @(posedge clk_i) disable iff (!rst_ni) 
+        xip_req_i && (xip_addr_i >= 24'hF00000) && (xip_addr_i <= 24'hFFFFFF)
+    );
+
+    // ========================================================
+    // PROTOCOL COVERAGE (Existing)
+    // ========================================================
+
+    property p_read_req_to_rvalid;
+        @(posedge clk_i)
+        disable iff (!rst_ni)
+        (xip_req_i && !xip_we_i)
+        |=> ##[1:600] xip_rvalid_o;
+    endproperty
+
+    c_read_req_to_rvalid: cover property (p_read_req_to_rvalid);
+
+    property p_spi_transaction;
+        @(posedge clk_i)
+        disable iff (!rst_ni)
+        $fell(spi_csn_o) |=> ##[1:600] $rose(spi_csn_o);
+    endproperty
+
+    c_spi_transaction: cover property (p_spi_transaction);
+
+    logic spi_sck_prev;
+    always_ff @(posedge clk_i or negedge rst_ni) begin
+        if (!rst_ni) spi_sck_prev <= 1'b0;
+        else         spi_sck_prev <= spi_sck_o;
+    end
+
+    property p_spi_clock_toggling;
+        @(posedge clk_i)
+        disable iff (!rst_ni)
+        (spi_sck_prev != spi_sck_o);
+    endproperty
+
+    c_spi_clock_toggle: cover property (p_spi_clock_toggling);
+
+endmodule
+
+
+// ========================================================
+// FORCE ELABORATION: Bind the coverage module to the RTL
+// ========================================================
+bind spi_flash_xip spi_flash_xip_cov u_cov_bind (
+    .clk_i(clk_i),
+    .rst_ni(rst_ni),
+    .xip_req_i(xip_req_i),
+    .xip_we_i(xip_we_i),
+    .xip_addr_i(xip_addr_i),
+    .xip_rvalid_o(xip_rvalid_o),
+    .spi_csn_o(spi_csn_o),
+    .spi_sck_o(spi_sck_o)
+);
